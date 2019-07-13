@@ -1,0 +1,35 @@
+# url
+7zip: https://www.7-zip.org/a/7z1900-x64.msi
+notepad: https://notepad-plus-plus.org/repository/7.x/7.7.1/npp.7.7.1.Installer.x64.exe
+chrome: https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B261DC12B-E193-3144-C559-CD9A6EDDCEB7%7D%26lang%3Dzh-CN%26browser%3D4%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/chrome/install/ChromeStandaloneSetup64.exe
+
+# # VC++
+# vc2010: https://www.realvnc.com/download/file/viewer.files/VNC-Viewer-6.19.325-Windows.exe
+# vc2012: https://my.visualstudio.com/Downloads?pid=1452
+# vc2013: https://aka.ms/highdpimfc2013x64enu
+# vc2015: https://aka.ms/vs/16/release/vc_redist.x64.exe
+
+# vc++
+vc:
+  vc2008:
+    id: vc++2008
+    url: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/vcredist_2008_x64.exe
+    name: vc++2008.exe
+  vc2010:
+    id: vc++2010
+    url: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/vcredist_2010_x64.exe
+    name: vc++2010.exe
+  vc2012:
+    id: vc++2012
+    url: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/vcredist_2012_x64.exe
+    name: vc++2012.exe
+  vc2013:
+    id: vc++2013
+    url: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/vcredist_2013_x64.exe
+    name: vc++2013.exe
+  vc++:
+    id: vc++2015
+    url: https://aka.ms/vs/16/release/vc_redist.x64.exe
+    name: vc++2015.exe
+
+dbForge: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/dbforgemysql81exp.exe

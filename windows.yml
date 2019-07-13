@@ -1,0 +1,9 @@
+---
+- name: windows
+  hosts: all
+
+  roles:
+    - { role: common, tags: "common" }
+    - { role: wampserver, tags: "wampserver" }
+    - { role: 9panel, tags: "9panel" }
+    - { role: sysprep, tags: "sysprep"}
