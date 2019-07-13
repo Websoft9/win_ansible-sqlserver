@@ -37,6 +37,8 @@
    ```winrm set winrm/config/service '@{AllowUnencrypted="true"}'``` 
    ```winrm set winrm/config/service/auth '@{Basic="true"}'```
 
+   > 如果执行以上步骤还会报错，可在防火墙开放5985端口重新连接。
+
 ## 主控端设置
 在 ansible 已安装的前提下，还需要安装 winrm 模块：
 ```pip install 'winrm>=0.3.0'```
