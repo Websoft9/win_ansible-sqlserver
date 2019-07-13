@@ -1,67 +1,67 @@
-# ---
-# - name: Download WAMPServer
-#   win_get_url:
-#     url: "{{wampserver}}"
-#     dest: C:\temp\wampserver.exe
+---
+- name: Download WAMPServer
+  win_get_url:
+    url: "{{wampserver}}"
+    dest: C:\temp\wampserver.exe
 
-# - name: Create websoft9 directory
-#   win_file:
-#     path: C:\websoft9\
-#     state: directory
+- name: Create websoft9 directory
+  win_file:
+    path: C:\websoft9\
+    state: directory
 
-# - name: Install WAMPServer
-#   win_package:
-#     path: C:\temp\wampserver.exe
-#     product_id: wampserver
-#     arguments:
-#     - /silent
-#     - /passive
-#     - /install
-#     state: present
+- name: Install WAMPServer
+  win_package:
+    path: C:\temp\wampserver.exe
+    product_id: wampserver
+    arguments:
+    - /silent
+    - /passive
+    - /install
+    state: present
 
-# - name: start apache & mysql
-#   win_service:
-#     name: "{{item}}"
-#     start_mode: auto
-#     state: started
-#   with_items:
-#     - wampapache64
-#     - wampmariadb64
-#     - wampmysqld64
+- name: start apache & mysql
+  win_service:
+    name: "{{item}}"
+    start_mode: auto
+    state: started
+  with_items:
+    - wampapache64
+    - wampmariadb64
+    - wampmysqld64
 
-# - name: Get MySQL Version
-#   win_command: mysql -V
+- name: Get MySQL Version
+  win_command: mysql -V
+  args:
+    chdir: C:\wamp64\bin\mysql\mysql5.7.26\bin
+  register: mysql_version
+
+- debug:
+    var: mysql_version
+
+- name: add mysql path environment variables
+  win_path:
+    elements:
+      - 'C:\websoft9\wamp64\bin\apache\apache2.4.39\bin'
+      - 'C:\websoft9\wamp64\bin\mysql\mysql5.7.26\bin'
+      - 'C:\websoft9\wamp64\bin\mariadb\mariadb10.3.14\bin'
+
+- name: Reboot Machine
+  win_reboot:
+    reboot_timeout: 60
+    connect_timeout: 15
+
+# TODO 修改密码
+# - name: Reset MySQL password
+#   win_shell: |
+#       mysqladmin -uroot -p password 123456
 #   args:
 #     chdir: C:\wamp64\bin\mysql\mysql5.7.26\bin
-#   register: mysql_version
 
-# - debug:
-#     var: mysql_version
-
-# - name: add mysql path environment variables
-#   win_path:
-#     elements:
-#       - 'C:\websoft9\wamp64\bin\apache\apache2.4.39\bin'
-#       - 'C:\websoft9\wamp64\bin\mysql\mysql5.7.26\bin'
-#       - 'C:\websoft9\wamp64\bin\mariadb\mariadb10.3.14\bin'
-
-# - name: Reboot Machine
-#   win_reboot:
-#     reboot_timeout: 60
-#     connect_timeout: 15
-
-# # TODO 修改密码
-# # - name: Reset MySQL password
-# #   win_shell: |
-# #       mysqladmin -uroot -p password 123456
-# #   args:
-# #     chdir: C:\wamp64\bin\mysql\mysql5.7.26\bin
-
-# # apache
-# - name: change httpd-vhsot.conf file
-#   win_template:
-#     src: templates/httpd-vhosts.conf.j2
-#     dest: C:\wamp64\bin\apache\apache2.4.39\conf\extra\httpd-vhosts.conf
+# apache
+- name: change httpd-vhsot.conf file
+  win_template:
+    src: templates/httpd-vhosts.conf.j2
+    dest: C:\wamp64\bin\apache\apache2.4.39\conf\extra\httpd-vhosts.conf
 
 - name: Add 9panel configration file
   win_template:

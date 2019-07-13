@@ -1,6 +1,6 @@
 ## Sysprep
 - name: Sysprep
-  win_shell:
+  win_command:
     sysprep.exe  /oobe /generalize /shutdown
   args:
     chdir: C:\Windows\System32\Sysprep
