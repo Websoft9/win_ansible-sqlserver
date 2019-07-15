@@ -1,6 +1,11 @@
+---
+- name: Ping Test
+  win_ping:
+
 ## Sysprep
 - name: Sysprep
   win_command:
-    sysprep.exe  /oobe /generalize /shutdown
+    .\Sysprep.exe /oobe /generalize /shutdown
   args:
     chdir: C:\Windows\System32\Sysprep
+  ignore_errors: yes
