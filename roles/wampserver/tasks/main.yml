@@ -6,18 +6,22 @@
 
 - name: Create websoft9 directory
   win_file:
-    path: C:\websoft9\
+    path: C:\websoft9\wampserver
     state: directory
 
+## 失败代码
+# - name: Install WAMPServer
+#   win_package:
+#     path: C:\temp\wampserver.exe
+#     product_id: wampserver
+#     arguments:
+#     - /VERYSILENT
+#     - /DIR="C:\websoft9\wampserver"
+#     - /NORESTART
+#     state: present
+
 - name: Install WAMPServer
-  win_package:
-    path: C:\temp\wampserver.exe
-    product_id: wampserver
-    arguments:
-    - /silent
-    - /passive
-    - /install
-    state: present
+  win_shell: C:\temp\wampserver.exe /VERYSILENT /DIR="C:\websoft9\wampserver"
 
 - name: start apache & mysql
   win_service:
@@ -29,47 +33,40 @@
     - wampmariadb64
     - wampmysqld64
 
-- name: Get MySQL Version
-  win_command: mysql -V
-  args:
-    chdir: C:\wamp64\bin\mysql\mysql5.7.26\bin
-  register: mysql_version
-
-- debug:
-    var: mysql_version
-
 - name: add mysql path environment variables
   win_path:
     elements:
-      - 'C:\websoft9\wamp64\bin\apache\apache2.4.39\bin'
-      - 'C:\websoft9\wamp64\bin\mysql\mysql5.7.26\bin'
-      - 'C:\websoft9\wamp64\bin\mariadb\mariadb10.3.14\bin'
+      - 'C:\websoft9\wamp64\bin\apache\apache"{{apache_ver}}"\bin'
+      - 'C:\websoft9\wamp64\bin\mysql\"{{mysql_ver}}"\bin'
+      - 'C:\websoft9\wamp64\bin\mariadb\"{{mariadb_ver}}"\bin'
 
 - name: Reboot Machine
   win_reboot:
-    reboot_timeout: 60
+    reboot_timeout: 120
     connect_timeout: 15
 
-# TODO 修改密码
+## TODO 修改密码
 # - name: Reset MySQL password
-#   win_shell: |
+#   win_command:
 #       mysqladmin -uroot -p password 123456
 #   args:
 #     chdir: C:\wamp64\bin\mysql\mysql5.7.26\bin
 
-# apache
+
+
+## apache
 - name: change httpd-vhsot.conf file
   win_template:
     src: templates/httpd-vhosts.conf.j2
-    dest: C:\wamp64\bin\apache\apache2.4.39\conf\extra\httpd-vhosts.conf
+    dest: C:\websoft9\wampserver\bin\apache\apache2.4.39\conf\extra\httpd-vhosts.conf
 
 - name: Add 9panel configration file
   win_template:
     src: templates/9panel.conf.j2
-    dest: C:\wamp64\alias\9panel.conf
+    dest: C:\websoft9\wampserver\alias\9panel.conf
 
 #　Restart Service
-- name: Restart apache & mysql
+- name: Restart apache & mysql & mariadb
   win_service:
     name: "{{item}}"
     state: restarted
@@ -86,7 +83,7 @@
 
 - name: Create shotcut in public desktop
   win_shortcut:
-    src: C:\wamp64\wampmanager.exe
+    src: C:\websoft9\wampserver\wampmanager.exe
     dest: C:\Users\Public\Desktop\Wampserver64.lnk
     directory: C:\wamp64\
 
@@ -96,5 +93,3 @@
     src: C:\wamp64\wampmanager.exe
     dest: C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\Wampserver64.lnk
     directory: C:\wamp64\
-
-# TODO 修改文件路径

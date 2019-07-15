@@ -1,68 +1,68 @@
-# ---
-# - name: Remove all pagefiles disable AutomaticManagedPagefile and set C pagefile
-#   win_pagefile:
-#     drive: C
-#     initial_size: 1024
-#     maximum_size: 2048
-#     remove_all: yes
-#     automatic: no
-#     state: present
+---
+- name: Remove all pagefiles disable AutomaticManagedPagefile and set C pagefile
+  win_pagefile:
+    drive: C
+    initial_size: 1024
+    maximum_size: 2048
+    remove_all: yes
+    automatic: no
+    state: present
 
-# - name: Windows update
-#   win_updates:
-#     category_names:
-#       - SecurityUpdates
-#       - CriticalUpdates
-#       - UpdateRollups
-#     state: searched
-#     reboot: yes
-#     reboot_timeout: 3600
+- name: Windows update
+  win_updates:
+    category_names:
+      - SecurityUpdates
+      - CriticalUpdates
+      - UpdateRollups
+    state: searched
+    reboot: yes
+    reboot_timeout: 3600
 
-# - name: Ping Test
-#   win_ping:
+- name: Ping Test
+  win_ping:
 
-# - name: Settings Firewall rule of defauls
-#   win_firewall_rule:
-#     name: "{{item.name}}"
-#     localport: "{{item.port}}"
-#     action: allow
-#     direction: in
-#     protocol: tcp
-#     state: present
-#     enabled: yes
-#   with_items:
-#     - {name: HTTP,port: '80'}
-#     - {name: HTTPS,port: '443'}
-#     - {name: FTP,port: '20,21'}
-#     - {name: MySQL,port: '3306'}
+- name: Settings Firewall rule of defauls
+  win_firewall_rule:
+    name: "{{item.name}}"
+    localport: "{{item.port}}"
+    action: allow
+    direction: in
+    protocol: tcp
+    state: present
+    enabled: yes
+  with_items:
+    - {name: HTTP,port: '80'}
+    - {name: HTTPS,port: '443'}
+    - {name: FTP,port: '20,21'}
+    - {name: MySQL,port: '3306'}
 
-# - name: Add This-PC Desktop icon
-#   win_regedit:
-#     path: '{{item}}'
-#     type: dword
-#     name: "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
-#     data: 00000000
-#   with_items:
-#     - HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel
-#     - HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu
+- name: Add This-PC Desktop icon
+  win_regedit:
+    path: '{{item}}'
+    type: dword
+    name: "{20D04FE0-3AEA-1069-A2D8-08002B30309D}"
+    data: 00000000
+  with_items:
+    - HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel
+    - HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu
 
-# - name: Install 7zip
-#   win_package:
-#     path: https://www.7-zip.org/a/7z1900-x64.msi
-#     product_id: 7zip
-#     state: present
+- name: Install 7zip
+  win_package:
+    path: https://www.7-zip.org/a/7z1900-x64.msi
+    product_id: 7zip
+    state: present
 
-# - name: Install notepad-plus-plus
-#   win_package:
-#     path: https://notepad-plus-plus.org/repository/7.x/7.7.1/npp.7.7.1.Installer.x64.exe
-#     product_id: notepad-plus-plus
-#     arguments:
-#     - /S
+- name: Install notepad-plus-plus
+  win_package:
+    path: https://notepad-plus-plus.org/repository/7.x/7.7.1/npp.7.7.1.Installer.x64.exe
+    product_id: notepad-plus-plus
+    arguments:
+    - /S
 
-# - name: Create tampority directory
-#   win_file:
-#     path: C:\temp
-#     state: directory
+- name: Create tampority directory
+  win_file:
+    path: C:\temp
+    state: directory
 
 - name: Download Chrome
   win_get_url:
@@ -98,7 +98,7 @@
     arguments:
     - /silent
 
-# 管理快捷方式
+## 管理快捷方式
 - name: delete default shortcut
   win_shortcut:
     dest: C:\Users\hl\Desktop\dbForge Studio Express for MySQL.lnk

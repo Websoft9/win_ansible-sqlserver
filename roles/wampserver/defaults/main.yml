@@ -1,1 +1,10 @@
 wampserver: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/wampserver3.1.9_x64.exe
+
+# 版本号：
+apache_ver: 2.4.39
+mysql_ver: 5.7.26
+mariadb_ver: 10.3.14
+
+# 数据库密码
+mysql_password: 4EuG.9UtDvJV^b
+mariadb_password: Fkv96JWF2cd3ZJ
