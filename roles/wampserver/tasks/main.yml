@@ -9,7 +9,7 @@
     path: C:\websoft9\wampserver
     state: directory
 
-## 失败代码
+## 失败代码 /VERYSILENT无法识别？
 # - name: Install WAMPServer
 #   win_package:
 #     path: C:\temp\wampserver.exe
@@ -17,7 +17,6 @@
 #     arguments:
 #     - /VERYSILENT
 #     - /DIR="C:\websoft9\wampserver"
-#     - /NORESTART
 #     state: present
 
 - name: Install WAMPServer
@@ -36,9 +35,9 @@
 - name: add mysql path environment variables
   win_path:
     elements:
-      - 'C:\websoft9\wamp64\bin\apache\apache"{{apache_ver}}"\bin'
-      - 'C:\websoft9\wamp64\bin\mysql\"{{mysql_ver}}"\bin'
-      - 'C:\websoft9\wamp64\bin\mariadb\"{{mariadb_ver}}"\bin'
+      - 'C:\websoft9\wampserver\bin\apache\apache"{{apache_ver}}"\bin'
+      - 'C:\websoft9\wampserver\bin\mysql\"{{mysql_ver}}"\bin'
+      - 'C:\websoft9\wampserver\bin\mariadb\"{{mariadb_ver}}"\bin'
 
 - name: Reboot Machine
   win_reboot:

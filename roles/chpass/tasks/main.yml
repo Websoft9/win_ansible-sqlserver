@@ -1,0 +1,7 @@
+## TODO 修改密码
+- name: Reset MySQL password
+  win_command:
+      mysqladmin -uroot -p password 123456
+  args:
+    chdir: C:\websoft9\wampserver\bin\mysql\mysql{{mysql_ver}}\bin
+
