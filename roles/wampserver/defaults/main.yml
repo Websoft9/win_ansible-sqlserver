@@ -8,3 +8,8 @@ mariadb_ver: 10.3.14
 # 数据库密码
 mysql_password: 4EuG.9UtDvJV^b
 mariadb_password: Fkv96JWF2cd3ZJ
+
+# phpmyadmin版本号
+phpmyadmin_url: https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.zip
+old_phpmyadmin_version: 4.8.5
+new_phpmyadmin_version: 4.9.0.1

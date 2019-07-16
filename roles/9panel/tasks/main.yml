@@ -1,39 +1,39 @@
-# # 9panel
-# - name: delete default source code
-#   win_file:
-#     path: C:\websoft9\wampserver\www
-#     state: absent
+# 9panel
+- name: delete default source code
+  win_file:
+    path: C:\websoft9\wampserver\www
+    state: absent
 
-# - name: create www folder
-#   win_file:
-#     path: "{{item}}"
-#     state: directory
-#   with_items:
-#     - C:\websoft9\wampserver\www
-#     - C:\websoft9\wampserver\apps\9panel
+- name: create www folder
+  win_file:
+    path: "{{item}}"
+    state: directory
+  with_items:
+    - C:\websoft9\wampserver\www
+    - C:\websoft9\wampserver\apps\9panel
 
-# - name: Download 9panel
-#   win_get_url:
-#     url: https://github.com/Websoft9/9panel/archive/master.zip
-#     dest: C:\temp\9panel.zip
+- name: Download 9panel
+  win_get_url:
+    url: https://github.com/Websoft9/9panel/archive/master.zip
+    dest: C:\temp\9panel.zip
 
-# - name: unzip 9panel
-#   win_unzip:
-#     src: C:\temp\9panel.zip
-#     dest: C:\temp\
-#     delete_archive: yes
+- name: unzip 9panel
+  win_unzip:
+    src: C:\temp\9panel.zip
+    dest: C:\temp\
+    delete_archive: yes
 
-# - name: copy 9panel to \wamp64\apps\
-#   win_copy:
-#     src: C:\temp\9panel-master\
-#     dest: C:\websoft9\wampserver\apps\9panel
-#     remote_src: yes
+- name: copy 9panel to \wamp64\apps\
+  win_copy:
+    src: C:\temp\9panel-master\
+    dest: C:\websoft9\wampserver\apps\9panel
+    remote_src: yes
 
-# - name: modify 9panel
-#   win_lineinfile:
-#     path: C:\websoft9\wampserver\apps\9panel\js\websoft9.js
-#     regexp: 'var set_infrastructure="LAMP";'
-#     line: 'var set_infrastructure="WAMPServer";'
+- name: modify 9panel
+  win_lineinfile:
+    path: C:\websoft9\wampserver\apps\9panel\js\websoft9.js
+    regexp: 'var set_infrastructure="LAMP";'
+    line: 'var set_infrastructure="WAMPServer";'
 
 - name: copy 9panel to \wamp64\www\
   win_copy:

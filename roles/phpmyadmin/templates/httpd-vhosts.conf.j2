@@ -1,0 +1,15 @@
+# Virtual Hosts
+#
+
+<VirtualHost *:80>
+ServerName www.mydomain.com
+ServerAlias other.mydomain.com
+DocumentRoot "C:\websoft9\wampserver\www"
+ErrorLog "C:\websoft9\wampserver\logs\mydomain.com_error_apache.log"
+CustomLog "C:\websoft9\wampserver\logs\mydomain.com_access_apache.log" common
+<Directory "C:\websoft9\wampserver\www">
+Options Indexes FollowSymlinks
+AllowOverride All
+Require all granted
+</Directory>
+</VirtualHost>

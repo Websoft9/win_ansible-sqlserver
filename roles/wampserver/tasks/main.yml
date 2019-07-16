@@ -22,6 +22,36 @@
 - name: Install WAMPServer
   win_shell: C:\temp\wampserver.exe /VERYSILENT /DIR="C:\websoft9\wampserver"
 
+## 更换 phpMyAdmin 版本和配置文件
+- name: Download latest versiong phpmyadmin
+  win_get_url:
+    url: "{{phpmyadmin_url}}"
+    dest: C:\temp\phpMyAdmin.zip
+
+- name: Delete default phpmyadmin
+  win_file:
+    path: C:\websoft9\wampserver\apps\phpmyadmin{{old_phpmyadmin_version}}
+    state: absent
+
+- name: Unzip phpmyadmin
+  win_unzip:
+    src: C:\temp\phpMyAdmin.zip
+    dest: C:\websoft9\wampserver\apps
+
+- name: Rename phpmyadmin
+  win_shell:
+    ren C:\websoft9\wampserver\apps\phpMyAdmin-{{new_phpmyadmin_version}}-all-languages phpmyadmin
+
+- name: copy phpmyadmin configuration file
+  win_template:
+    src: config.inc.php.j2
+    dest: C:\websoft9\wampserver\apps\phpmyadmin\config.inc.php
+
+- name: Replace phpmyadmin.conf
+  win_template:
+    src: phpmyadmin.conf.j2
+    dest: C:\websoft9\wampserver\alias\phpmyadmin.conf
+
 - name: start apache & mysql
   win_service:
     name: "{{item}}"
@@ -32,17 +62,13 @@
     - wampmariadb64
     - wampmysqld64
 
+## 添加环境变量
 - name: add mysql path environment variables
   win_path:
     elements:
       - 'C:\websoft9\wampserver\bin\apache\apache"{{apache_ver}}"\bin'
       - 'C:\websoft9\wampserver\bin\mysql\mysql"{{mysql_ver}}"\bin'
       - 'C:\websoft9\wampserver\bin\mariadb\mariadb"{{mariadb_ver}}"\bin'
-
-- name: Reboot Machine
-  win_reboot:
-    reboot_timeout: 120
-    connect_timeout: 15
 
 ## 重置MySQL&MariaDB密码
 - name: Reset MySQL password
@@ -89,20 +115,20 @@
     - wampmysqld64
 
 # 修改快捷方式
-- name: delete default icon
+- name: delete default lnk
   win_shortcut:
-    dest: C:\Users\hl\Desktop\Wampserver64.lnk
+    dest: C:\Users\websoft9\Desktop\Wampserver64.lnk
     state: absent
 
 - name: Create shotcut in public desktop
   win_shortcut:
     src: C:\websoft9\wampserver\wampmanager.exe
     dest: C:\Users\Public\Desktop\Wampserver64.lnk
-    directory: C:\wamp64\
+    directory: C:\websoft9\wampserver
 
 # 添加快捷方式到启动菜单
 - name: Create shotcut in public desktop
   win_shortcut:
-    src: C:\wamp64\wampmanager.exe
+    src: C:\websoft9\wampserver\wampmanager.exe
     dest: C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\Wampserver64.lnk
-    directory: C:\wamp64\
+    directory: C:\websoft9\wampserver

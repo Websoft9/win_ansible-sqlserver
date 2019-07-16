@@ -51,8 +51,8 @@ hosts 文件示例：
   40.121.53.104
 
   [windows-server:vars]
-  ansible_ssh_user="hl"
-  ansible_ssh_pass="xinshi1993.."
+  ansible_ssh_user="admin"
+  ansible_ssh_pass="123456"
   ansible_ssh_port=5985
   ansible_connection="winrm"
   ansible_winrm_server_cert_validation=ignore

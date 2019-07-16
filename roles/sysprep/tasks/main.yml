@@ -1,14 +1,21 @@
 ---
-- name: Ping Test
-  win_ping:
+- name: Windows update
+  win_updates:
+    category_names:
+      - SecurityUpdates
+      - CriticalUpdates
+      - UpdateRollups
+    reboot: yes
+    reboot_timeout: 3600
 
 # - name: disable Winrm
 #   win_shell: sc config winrm start= disabled
 #   args:
 #     executable: cmd
 
-# # - name: Settings ExecutionPolicy
-# #   win_shell: Set-ExecutionPolicy -ExecutionPolicy Restricted -Force
+# - name: Settings ExecutionPolicy
+#   win_shell: Set-ExecutionPolicy -ExecutionPolicy Restricted -Force
+#   ignore_errors: yes
 
 # ## Sysprep
 # - name: Sysprep
