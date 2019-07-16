@@ -1,7 +1,7 @@
 # url
 7zip: https://www.7-zip.org/a/7z1900-x64.msi
 notepad: https://notepad-plus-plus.org/repository/7.x/7.7.1/npp.7.7.1.Installer.x64.exe
-chrome: 
+chrome: http://libs.websoft9.com/apps/Windows/ChromeStandaloneSetup64.exe
 
 # WAMP
 WAMP73: https://bitnami.com/redirect/to/586634/bitnami-wampstack-7.3.6-2-windows-x64-installer.exe

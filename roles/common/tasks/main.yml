@@ -66,7 +66,7 @@
 
 - name: Download Chrome
   win_get_url:
-    url: http://libs.websoft9.com/apps/Windows/ChromeStandaloneSetup64.exe
+    url: "{{chrome}}"
     dest: C:\temp\
 
 - name: Install Chrome

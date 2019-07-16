@@ -2,10 +2,18 @@
 - name: Ping Test
   win_ping:
 
-## Sysprep
-- name: Sysprep
-  win_command:
-    .\Sysprep.exe /oobe /generalize /shutdown
-  args:
-    chdir: C:\Windows\System32\Sysprep
-  ignore_errors: yes
+# - name: disable Winrm
+#   win_shell: sc config winrm start= disabled
+#   args:
+#     executable: cmd
+
+# # - name: Settings ExecutionPolicy
+# #   win_shell: Set-ExecutionPolicy -ExecutionPolicy Restricted -Force
+
+# ## Sysprep
+# - name: Sysprep
+#   win_command:
+#     .\Sysprep.exe /oobe /generalize /shutdown
+#   args:
+#     chdir: C:\Windows\System32\Sysprep
+#   ignore_errors: yes

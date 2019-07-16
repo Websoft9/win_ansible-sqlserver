@@ -36,24 +36,38 @@
   win_path:
     elements:
       - 'C:\websoft9\wampserver\bin\apache\apache"{{apache_ver}}"\bin'
-      - 'C:\websoft9\wampserver\bin\mysql\"{{mysql_ver}}"\bin'
-      - 'C:\websoft9\wampserver\bin\mariadb\"{{mariadb_ver}}"\bin'
+      - 'C:\websoft9\wampserver\bin\mysql\mysql"{{mysql_ver}}"\bin'
+      - 'C:\websoft9\wampserver\bin\mariadb\mariadb"{{mariadb_ver}}"\bin'
 
 - name: Reboot Machine
   win_reboot:
     reboot_timeout: 120
     connect_timeout: 15
 
-## TODO 修改密码
-# - name: Reset MySQL password
-#   win_command:
-#       mysqladmin -uroot -p password 123456
-#   args:
-#     chdir: C:\wamp64\bin\mysql\mysql5.7.26\bin
+## 重置MySQL&MariaDB密码
+- name: Reset MySQL password
+  win_command:
+    mysqladmin -uroot password "{{mysql_password}}"
+  args:
+    chdir: C:\websoft9\wampserver\bin\mysql\mysql{{mysql_ver}}\bin
 
+- name: Reset MariaDB password
+  win_command:
+    mysqladmin -uroot password "{{mariadb_password}}"
+  args:
+    chdir: C:\websoft9\wampserver\bin\mariadb\mariadb{{mariadb_ver}}\bin
 
+- name: Create Credentials Directory
+  win_file:
+    path: C:\Credentials\
+    state: directory
 
-## apache
+- name: Copy password.txt to Credentials
+  win_template:
+    src: password.txt.j2
+    dest: C:\Credentials\password.txt
+
+## 修改apache配置文件
 - name: change httpd-vhsot.conf file
   win_template:
     src: templates/httpd-vhosts.conf.j2
@@ -74,7 +88,7 @@
     - wampmariadb64
     - wampmysqld64
 
-# 修改图标
+# 修改快捷方式
 - name: delete default icon
   win_shortcut:
     dest: C:\Users\hl\Desktop\Wampserver64.lnk
