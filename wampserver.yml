@@ -5,8 +5,8 @@
   become_user: websoft9
   become_method: runas
 
-#   vars:
-#     ansible_become_password: Qwerty123456
+  vars:
+    ansible_become_password: Qwerty123456
 
   roles:
     - { role: common, tags: "common" }
