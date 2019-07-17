@@ -5,30 +5,23 @@
       - SecurityUpdates
       - CriticalUpdates
       - UpdateRollups
-    state: searched
-
-- name: Windows update
-  win_updates:
-    category_names:
-      - SecurityUpdates
-      - CriticalUpdates
-      - UpdateRollups
     reboot: yes
     reboot_timeout: 3600
+    log_path: C:\Users\websoft9\Desktop\1.txt
 
-# - name: disable Winrm
-#   win_shell: sc config winrm start= disabled
-#   args:
-#     executable: cmd
+- name: disable Winrm
+  win_shell: sc config winrm start= disabled
+  args:
+    executable: cmd
 
-# - name: Settings ExecutionPolicy
-#   win_shell: Set-ExecutionPolicy -ExecutionPolicy Restricted -Force
-#   ignore_errors: yes
+- name: Settings ExecutionPolicy
+  win_shell: Set-ExecutionPolicy -ExecutionPolicy Restricted -Force
+  ignore_errors: yes
 
-# ## Sysprep
-# - name: Sysprep
-#   win_command:
-#     .\Sysprep.exe /oobe /generalize /shutdown
-#   args:
-#     chdir: C:\Windows\System32\Sysprep
-#   ignore_errors: yes
+## Sysprep
+- name: Sysprep
+  win_command:
+    .\Sysprep.exe /oobe /generalize /shutdown
+  args:
+    chdir: C:\Windows\System32\Sysprep
+  ignore_errors: yes
