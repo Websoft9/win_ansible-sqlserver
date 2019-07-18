@@ -9,19 +9,33 @@
     reboot_timeout: 3600
     log_path: C:\Users\websoft9\Desktop\1.txt
 
-- name: disable Winrm
-  win_shell: sc config winrm start= disabled
-  args:
-    executable: cmd
+# - name: Windows Update
+#   win_shell:
+#     Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+#     Install-Module PSWindowsUpdate -Force
+#     Get-WindowsUpdate
+#     Install-WindowsUpdate -AcceptAll -MicrosoftUpdate -AutoReboot
+#   become: yes
+#   become_user: websoft9
 
-- name: Settings ExecutionPolicy
-  win_shell: Set-ExecutionPolicy -ExecutionPolicy Restricted -Force
-  ignore_errors: yes
+# - name: Reboot Machine
+#   win_updates:
+#     reboot: yes
+#     reboot_timeout: 3600
 
-## Sysprep
-- name: Sysprep
-  win_command:
-    .\Sysprep.exe /oobe /generalize /shutdown
-  args:
-    chdir: C:\Windows\System32\Sysprep
-  ignore_errors: yes
+# - name: disable Winrm
+#   win_shell: sc config winrm start= disabled
+#   args:
+#     executable: cmd
+
+# - name: Settings ExecutionPolicy
+#   win_shell: Set-ExecutionPolicy -ExecutionPolicy Restricted -Force
+#   ignore_errors: yes
+
+# ## Sysprep
+# - name: Sysprep
+#   win_command:
+#     .\Sysprep.exe /oobe /generalize /shutdown
+#   args:
+#     chdir: C:\Windows\System32\Sysprep
+#   ignore_errors: yes
