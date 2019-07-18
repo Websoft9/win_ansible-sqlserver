@@ -16,3 +16,6 @@ vc2015: https://aka.ms/vs/16/release/vc_redist.x64.exe
 
 # dbForge
 dbForge: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/dbforgemysql81exp.exe
+
+# cloudplatform
+cloudplatform: Azure
