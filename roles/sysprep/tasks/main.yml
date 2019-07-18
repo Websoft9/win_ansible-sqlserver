@@ -9,7 +9,7 @@
     reboot_timeout: 3600
     log_path: C:\Users\websoft9\Desktop\1.txt
 
-# - name: Windows Update
+# - name: Windows Update by powershell
 #   win_shell:
 #     Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 #     Install-Module PSWindowsUpdate -Force
@@ -46,3 +46,5 @@
     ec2config.exe -sysprep
   args:
     chdir: C:\Program Files\Amazon\ec2configservice\
+  ignore_errors: yes
+  when: cloudplatform == "AWS"

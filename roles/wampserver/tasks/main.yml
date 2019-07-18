@@ -63,25 +63,45 @@
     - wampmysqld64
 
 ## 添加环境变量
-- name: add mysql path environment variables
+- name: obtain apache directory name
+  win_shell: dir /b C:\websoft9\wampserver\bin\apache
+  args:
+    executable: cmd
+  register: apache_ver
+
+- name: obtain mysql directory name
+  win_shell: dir /b C:\websoft9\wampserver\bin\mysql
+  args:
+    executable: cmd
+  register: mysql_ver
+
+- name: obtain mariadb directory name
+  win_shell: dir /b C:\websoft9\wampserver\bin\mariadb
+  args:
+    executable: cmd
+  register: mariadb_ver
+
+- debug:
+    var: mysql_ver.stdout_lines[0]
+
+- name: add apache & mysql path environment variables
   win_path:
     elements:
-      - 'C:\websoft9\wampserver\bin\apache\apache"{{apache_ver}}"\bin'
-      - 'C:\websoft9\wampserver\bin\mysql\mysql"{{mysql_ver}}"\bin'
-      - 'C:\websoft9\wampserver\bin\mariadb\mariadb"{{mariadb_ver}}"\bin'
+      - 'C:\websoft9\wampserver\bin\apache\{{mysql_ver.stdout_lines[0]}}\bin'
+      - 'C:\websoft9\wampserver\bin\mysql\{{mysql_ver.stdout_lines[0]}}\bin'
 
 ## 重置MySQL&MariaDB密码
 - name: Reset MySQL password
   win_command:
     mysqladmin -uroot password "{{mysql_password}}"
   args:
-    chdir: C:\websoft9\wampserver\bin\mysql\mysql{{mysql_ver}}\bin
+    chdir: C:\websoft9\wampserver\bin\mysql\{{mysql_ver.stdout_lines[0]}}\bin
 
 - name: Reset MariaDB password
   win_command:
     mysqladmin -uroot password "{{mariadb_password}}"
   args:
-    chdir: C:\websoft9\wampserver\bin\mariadb\mariadb{{mariadb_ver}}\bin
+    chdir: C:\websoft9\wampserver\bin\mariadb\{{mariadb_ver.stdout_lines[0]}}\bin
 
 - name: Create Credentials Directory
   win_file:
@@ -96,8 +116,8 @@
 ## 修改apache配置文件
 - name: change httpd-vhsot.conf file
   win_template:
-    src: templates/httpd-vhosts.conf.j2
-    dest: C:\websoft9\wampserver\bin\apache\apache2.4.39\conf\extra\httpd-vhosts.conf
+    src: httpd-vhosts.conf.j2
+    dest: C:\websoft9\wampserver\bin\apache\{{apache_ver.stdout_lines[0]}}\conf\extra\httpd-vhosts.conf
 
 - name: Add 9panel configration file
   win_template:
@@ -120,10 +140,16 @@
     dest: C:\Users\websoft9\Desktop\Wampserver64.lnk
     state: absent
 
-- name: Create shotcut in public desktop
+- name: Create wampserver's lnk in public desktop
   win_shortcut:
     src: C:\websoft9\wampserver\wampmanager.exe
     dest: C:\Users\Public\Desktop\Wampserver64.lnk
+    directory: C:\websoft9\wampserver
+
+- name: Create password.txt's lnk in public desktop
+  win_shortcut:
+    src: C:\Credentials\password.txt
+    dest: C:\Users\Public\Desktop\password.lnk
     directory: C:\websoft9\wampserver
 
 # 添加快捷方式到启动菜单
