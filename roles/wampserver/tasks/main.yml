@@ -144,6 +144,7 @@
   win_shortcut:
     src: C:\websoft9\wampserver\wampmanager.exe
     dest: C:\Users\Public\Desktop\Wampserver64.lnk
+    icon: C:\websoft9\wampserver\wampmanager.exe,0
     directory: C:\websoft9\wampserver
 
 - name: Create password.txt's lnk in public desktop
