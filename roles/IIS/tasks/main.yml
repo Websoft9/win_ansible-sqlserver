@@ -1,0 +1,26 @@
+## IIS
+- name: Install IIS Web-Server with sub features and management tools
+  win_feature:
+    name: Web-Server
+    state: present
+    include_sub_features: yes
+    include_management_tools: yes
+
+- name: Create IIS lnk
+  win_shortcut:
+    src: C:\windows\system32\inetsrv\InetMgr.exe
+    dest: C:\Users\Public\Desktop\Internet Information Services (IIS) Manager.lnk
+    directory: C:\windows\system32\inetsrv\
+
+- name: Reboot Machine
+  win_reboot:
+    reboot_timeout: 3600
+
+- include: 9panel.yml
+
+- name: Add 9panel webapplication on IIS.
+  win_iis_webapplication:
+    name: 9panel
+    site: Default Web Site
+    state: present
+    physical_path: C:\inetpub\9panel

@@ -1,7 +1,7 @@
 # 9panel
 - name: delete default source code
   win_file:
-    path: C:\websoft9\wampserver\www
+    path: C:\inetpub\wwwroot
     state: absent
 
 - name: create www folder
@@ -9,8 +9,9 @@
     path: "{{item}}"
     state: directory
   with_items:
-    - C:\websoft9\wampserver\www
-    - C:\websoft9\wampserver\apps\9panel
+    - C:\inetpub\wwwroot
+    - C:\inetpub\9panel
+    - C:\temp\
 
 - name: Download 9panel
   win_get_url:
@@ -26,24 +27,24 @@
 - name: copy 9panel to \wamp64\apps\
   win_copy:
     src: C:\temp\9panel-master\
-    dest: C:\websoft9\wampserver\apps\9panel
+    dest: C:\inetpub\9panel
     remote_src: yes
 
 - name: modify 9panel
   win_lineinfile:
-    path: C:\websoft9\wampserver\apps\9panel\js\websoft9.js
+    path: C:\inetpub\9panel\js\websoft9.js
     regexp: 'var set_infrastructure="LAMP";'
-    line: 'var set_infrastructure="WAMPServer";'
+    line: 'var set_infrastructure=".NET";'
 
-- name: copy 9panel to \wamp64\www\
+- name: copy 9panel to c:\inetpub\wwwroot
   win_copy:
-    src: C:\websoft9\wampserver\apps\9panel\
-    dest: C:\websoft9\wampserver\www\
+    src: C:\inetpub\9panel\
+    dest: C:\inetpub\wwwroot
     remote_src: yes
 
 - name: delete extra file
   win_file:
-    path: C:\websoft9\wampserver\www\{{item}}
+    path: C:\inetpub\wwwroot\{{item}}
     state: absent
   with_items:
     - index.html
@@ -52,7 +53,7 @@
     - tools.html
 
 - name: Rename example.html
-  win_shell: ren C:\websoft9\wampserver\www\example.html index.html
+  win_shell: ren C:\inetpub\wwwroot\example.html index.html
 
 - name: delete temporary directory
   win_file:

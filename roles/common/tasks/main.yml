@@ -51,12 +51,12 @@
     product_id: 7zip
     state: present
 
-- name: Install notepad-plus-plus
-  win_package:
-    path: https://notepad-plus-plus.org/repository/7.x/7.7.1/npp.7.7.1.Installer.x64.exe
-    product_id: notepad-plus-plus
-    arguments:
-    - /S
+# - name: Install notepad++
+#   win_package:
+#     path: https://notepad-plus-plus.org/repository/7.x/7.7.1/npp.7.7.1.Installer.x64.exe
+#     product_id: notepad-plus-plus
+#     arguments:
+#     - /S
 
 - name: Create tampority directory
   win_file:
@@ -90,21 +90,9 @@
     state: present
   with_dict: "{{vc}}"
 
-- name: Install dbForge
-  win_package:
-    path: "{{dbForge}}"
-    product_id: dbForge
-    arguments:
-    - /silent
 
 ## 管理快捷方式
 - name: delete default shortcut
   win_shortcut:
     dest: C:\Users\hl\Desktop\dbForge Studio Express for MySQL.lnk
     state: absent
-
-- name: Create dbForge shortcut to public Desktop
-  win_shortcut:
-    src: C:\Program Files\Devart\dbForge Studio Express for MySQL\dbforgemysql.exe
-    dest: C:\Users\Public\Desktop\dbforgemysql.lnk
-    directory: C:\Program Files\Devart\dbForge Studio Express for MySQL\
