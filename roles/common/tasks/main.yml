@@ -47,16 +47,16 @@
 
 - name: Install 7zip
   win_package:
-    path: https://www.7-zip.org/a/7z1900-x64.msi
+    path: "{{7zip}}"
     product_id: 7zip
     state: present
 
-# - name: Install notepad++
-#   win_package:
-#     path: https://notepad-plus-plus.org/repository/7.x/7.7.1/npp.7.7.1.Installer.x64.exe
-#     product_id: notepad-plus-plus
-#     arguments:
-#     - /S
+- name: Install notepad++
+  win_package:
+    path: "{{notepad}}"
+    product_id: notepad-plus-plus
+    arguments:
+    - /S
 
 - name: Create tampority directory
   win_file:
