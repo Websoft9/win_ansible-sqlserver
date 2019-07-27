@@ -47,7 +47,7 @@
 
 - name: Install 7zip
   win_package:
-    path: "{{7zip}}"
+    path: https://www.7-zip.org/a/7z1900-x64.msi
     product_id: 7zip
     state: present
 

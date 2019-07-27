@@ -1,0 +1,65 @@
+---
+# requirements
+- name: Download OpenJDK1.8
+  win_get_url:
+    url: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/java-1.8.0-openjdk-1.8.0.222-1.b10.ojdkbuild.windows.x86_64.msi
+    dest: C:\temp\openjdk-1.8.0.msi
+
+- name: Install OpenJDK1.8
+  win_package:
+    path: C:\temp\openjdk-1.8.0.msi
+    product_id: openjdk
+    arguments:
+        - /quiet
+        - /norestart
+
+# 下载
+- name: Download SQLServer Install tool
+  win_get_url:
+    url: https://download.microsoft.com/download/3/7/6/3767D272-76A1-4F31-8849-260BD37924E4/SQLServer2016-SSEI-Expr.exe
+    dest: C:\temp\SQLServer.exe
+
+- name: Download SQLServer2016
+  win_shell:
+    .\SQLServer2016.exe /ACTION=Download /ENU /MEDIAPATH=C:\temp /MEDIATYPE=Advanced /Q
+  args:
+    chdir: C:\temp
+
+# 解压安装包
+- name: unzip package
+  win_shell:
+    .\SQLEXPRADV_x64_ENU.exe /q
+  args:
+    chdir: C:\temp
+
+- name: Copy ConfigurationFile.ini
+  win_template:
+    src: ConfigurationFile_2016.ini.j2
+    dest: C:\temp\SQLEXPRADV_x64_ENU\ConfigurationFile.ini
+
+- name: Install SQLServer2016
+  win_shell:
+    .\SETUP.EXE /CONFIGURATIONFILE=ConfigurationFile.ini
+  args:
+    chdir: C:\temp\SQLEXPRADV_x64_ENU
+
+## 安装SSMS
+- name: Download SSMS
+  win_get_url:
+    url: https://download.microsoft.com/download/2/9/C/29CC9731-CE3B-4EC8-89D8-E6B8EE88EAF5/SSMS-Setup-ENU.exe
+    dest: C:\temp
+
+- name: Install SSMS
+  win_shell:
+    .\SSMS-Setup-ENU.exe /install /quiet /norestart
+  args:
+    chdir: C:\temp
+
+## 快捷方式
+- name: Create SSMS lnk
+  win_shortcut:
+    src: C:\Program Files (x86)\Microsoft SQL Server Management Studio 18\Common7\IDE\Ssms.exe
+    dest: C:\Users\Public\Desktop\Microsoft SQL Server Management Studio 18.lnk
+    icon: C:\Program Files (x86)\Microsoft SQL Server Management Studio 18\Common7\IDE\ssms.ico
+
+

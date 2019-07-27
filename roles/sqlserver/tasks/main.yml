@@ -1,3 +1,7 @@
 - name: Install SQLServer2017
   include: sqlserver2017.yml
   when: sqlserver_ver == 2017
+
+- name: Install SQLServer2016
+  include: sqlserver2016.yml
+  when: sqlserver_ver == 2016

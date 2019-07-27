@@ -1,5 +1,5 @@
 [windows-server]
-23.100.23.57
+40.117.47.150
 
 [windows-server:vars]
 ansible_ssh_user="websoft9"
