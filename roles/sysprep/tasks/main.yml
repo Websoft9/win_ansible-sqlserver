@@ -7,7 +7,6 @@
       - UpdateRollups
     reboot: yes
     reboot_timeout: 3600
-    log_path: C:\Users\websoft9\Desktop\1.txt
 
 # - name: Windows Update by powershell
 #   win_shell:

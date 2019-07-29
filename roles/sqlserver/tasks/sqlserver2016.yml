@@ -1,4 +1,10 @@
 ---
+# Create temporary Directory
+- name: Create temporary directory
+  win_file:
+    path: C:\temp
+    state: directory
+
 # requirements
 - name: Download OpenJDK1.8
   win_get_url:
@@ -62,4 +68,18 @@
     dest: C:\Users\Public\Desktop\Microsoft SQL Server Management Studio 18.lnk
     icon: C:\Program Files (x86)\Microsoft SQL Server Management Studio 18\Common7\IDE\ssms.ico
 
+## 创建密码凭证文件
+- name: Create Credentials Directory
+  win_file:
+    path: C:\Credentials\
+    state: directory
 
+- name: Copy password.txt to Credentials
+  win_template:
+    src: password.txt.j2
+    dest: C:\Credentials\password.txt
+
+- name: Create password.lnk on desktop
+  win_shortcut:
+    src: C:\Credentials\password.txt
+    dest: C:\Users\Public\Desktop\password.lnk

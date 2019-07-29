@@ -10,6 +10,6 @@
 
   roles:
     - { role: common, tags: "common" }
-    - { role: sqlserver, tags: "sqlserver" }
     - { role: IIS, tags: "IIS" }
-    # - { role: sysprep, tags: "sysprep"}
+    - { role: sqlserver, tags: "sqlserver" }
+    - { role: sysprep, tags: "sysprep"}

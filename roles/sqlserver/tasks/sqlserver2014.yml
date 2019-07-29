@@ -1,0 +1,52 @@
+---
+# 下载
+- name: Create temporary directory
+  win_file:
+    path: C:\temp
+    state: directory
+
+- name: Download SQLServer SQLServer2014SP3
+  win_get_url:
+    url: https://download.microsoft.com/download/3/9/F/39F968FA-DEBB-4960-8F9E-0E7BB3035959/SQLEXPRADV_x64_ENU.exe
+    dest: C:\temp\
+
+# 解压安装包
+- name: unzip package
+  win_shell:
+    .\SQLEXPRADV_x64_ENU.exe /q
+  args:
+    chdir: C:\temp
+
+- name: Copy ConfigurationFile.ini
+  win_template:
+    src: ConfigurationFile_2014.ini.j2
+    dest: C:\temp\SQLEXPRADV_x64_ENU\ConfigurationFile.ini
+
+- name: Install SQLServer2014SP3
+  win_shell:
+    .\SETUP.EXE /CONFIGURATIONFILE=ConfigurationFile.ini
+  args:
+    chdir: C:\temp\SQLEXPRADV_x64_ENU
+
+## 快捷方式
+- name: Create SSMS lnk
+  win_shortcut:
+    src: C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\Ssms.exe
+    dest: C:\Users\Public\Desktop\SQL Server 2014 Management Studio.lnk
+    icon: C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\ssms.ico
+
+## 创建密码凭证文件
+- name: Create Credentials Directory
+  win_file:
+    path: C:\Credentials\
+    state: directory
+
+- name: Copy password.txt to Credentials
+  win_template:
+    src: password.txt.j2
+    dest: C:\Credentials\password.txt
+
+- name: Create password.lnk on desktop
+  win_shortcut:
+    src: C:\Credentials\password.txt
+    dest: C:\Users\Public\Desktop\password.lnk
