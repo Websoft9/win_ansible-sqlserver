@@ -50,3 +50,8 @@
   win_shortcut:
     src: C:\Credentials\password.txt
     dest: C:\Users\Public\Desktop\password.lnk
+
+- name: Delete temporary directory
+  win_file:
+    path: C:\temp
+    state: absent
