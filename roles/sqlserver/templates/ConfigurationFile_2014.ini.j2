@@ -132,7 +132,7 @@ SQLSVCACCOUNT="NT Service\MSSQLSERVER"
 
 ; Windows account(s) to provision as SQL Server system administrators. 
 
-SQLSYSADMINACCOUNTS="{{vm_name}}"
+SQLSYSADMINACCOUNTS="{{ansible_hostname}}"
 
 SAPWD="websoft9!"
 
@@ -146,7 +146,7 @@ ADDCURRENTUSERASSQLADMIN="True"
 
 ; Specify 0 to disable or 1 to enable the TCP/IP protocol. 
 
-TCPENABLED="0"
+TCPENABLED="1"
 
 ; Specify 0 to disable or 1 to enable the Named Pipes protocol. 
 

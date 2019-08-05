@@ -1,9 +1,10 @@
 [windows-server]
-13.82.228.18
+23.96.20.155
 
 [windows-server:vars]
 ansible_ssh_user="websoft9"
 ansible_ssh_pass="Qwerty123456"
 ansible_ssh_port=5985
 ansible_connection="winrm"
+ansible_winrm_read_timeout_sec="120"
 ansible_winrm_server_cert_validation=ignore
