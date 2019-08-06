@@ -1,14 +1,14 @@
-# - name: Install SQLServer2017
-#   include: sqlserver2017.yml
-#   when: sqlserver_ver == 2017
+- name: Install SQLServer2017
+  include: sqlserver2017.yml
+  when: sqlserver_ver == 2017
 
-# - name: Install SQLServer2016
-#   include: sqlserver2016.yml
-#   when: sqlserver_ver == 2016
+- name: Install SQLServer2016
+  include: sqlserver2016.yml
+  when: sqlserver_ver == 2016
 
-# - name: Install SQLServer2014
-#   include: sqlserver2014.yml
-#   when: sqlserver_ver == 2014
+- name: Install SQLServer2014
+  include: sqlserver2014.yml
+  when: sqlserver_ver == 2014
 
 - name: Install SQLServer2012
   include: sqlserver2012.yml

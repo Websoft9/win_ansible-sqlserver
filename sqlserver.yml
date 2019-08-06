@@ -9,7 +9,7 @@
     ansible_become_password: Qwerty123456
 
   roles:
-    - { role: common, tags: "common" }
+    # - { role: common, tags: "common" }
     - { role: IIS, tags: "IIS" }
     - { role: sqlserver, tags: "sqlserver" }
-    - { role: sysprep, tags: "sysprep"}
+    # - { role: sysprep, tags: "sysprep"}

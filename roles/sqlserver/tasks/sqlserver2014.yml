@@ -1,9 +1,4 @@
 ---
-# 获取账户名称
-- name: Get windows account name
-  win_shell: whoami
-  register: vm_name
-
 # 下载
 - name: Create temporary directory
   win_file:
