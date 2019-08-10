@@ -9,11 +9,18 @@
   win_get_url:
     url: https://download.microsoft.com/download/B/D/E/BDE8FAD6-33E5-44F6-B714-348F73E602B6/SQLEXPRADV_x64_ENU.exe
     dest: C:\temp\
+  when: language == "ENU"
+
+- name: Download SQLServer SQLServer2012SP4
+  win_get_url:
+    url: https://download.microsoft.com/download/A/4/3/A43F9D8D-5346-441A-ABAE-86C3AFE17B4D/SQLEXPRADV_x64_CHS.exe
+    dest: C:\temp\
+  when: language == "CHS"
 
 # 安装
-- name: Install SQLServer2012SP4
+- name: Install SQLServer2012SP4 ENU
   win_shell:
-    .\SQLEXPRADV_x64_ENU.exe /q /IACCEPTSQLSERVERLICENSETERMS /ACTION=Install /FEATURES=SQL,AS,RS,IS,Tools /SECURITYMODE=SQL /SQLSYSADMINACCOUNTS="{{ansible_hostname}}\websoft9" /INSTANCENAME=MSSQLSERVER  /SAPWD="websoft9!" /ISSVCSTARTUPTYPE=Automatic /BROWSERSVCSTARTUPTYPE=Automatic /SQLSVCSTARTUPTYPE=Automatic /TCPENABLED=1 /SQLSVCACCOUNT="NT Service\MSSQLSERVER"
+    .\SQLEXPRADV_x64_{{language}}.exe /q /IACCEPTSQLSERVERLICENSETERMS /ACTION=Install /FEATURES=SQL,AS,RS,IS,Tools /SECURITYMODE=SQL /SQLSYSADMINACCOUNTS="{{ansible_hostname}}\websoft9" /INSTANCENAME=MSSQLSERVER  /SAPWD="websoft9!" /ISSVCSTARTUPTYPE=Automatic /BROWSERSVCSTARTUPTYPE=Automatic /SQLSVCSTARTUPTYPE=Automatic /TCPENABLED=1 /SQLSVCACCOUNT="NT Service\MSSQLSERVER"
   args:
     chdir: C:\temp\
 

@@ -23,36 +23,32 @@
 - name: Download SQLServer Install tool
   win_get_url:
     url: https://download.microsoft.com/download/3/7/6/3767D272-76A1-4F31-8849-260BD37924E4/SQLServer2016-SSEI-Expr.exe
-    dest: C:\temp\SQLServer.exe
+    dest: C:\temp\SQLServer2016.exe
 
-- name: Download SQLServer2016
-  win_shell:
-    .\SQLServer2016.exe /ACTION=Download /ENU /MEDIAPATH=C:\temp /MEDIATYPE=Advanced /Q
-  args:
-    chdir: C:\temp
-
-# 解压安装包
-- name: unzip package
-  win_shell:
-    .\SQLEXPRADV_x64_ENU.exe /q
-  args:
-    chdir: C:\temp
-
+## 安装
 - name: Copy ConfigurationFile.ini
   win_template:
-    src: ConfigurationFile_2016.ini.j2
-    dest: C:\temp\SQLEXPRADV_x64_ENU\ConfigurationFile.ini
+    src: ConfigurationFile_2016_ENU.ini.j2
+    dest: C:\temp\ConfigurationFile.ini
 
-- name: Install SQLServer2016
+- name: Install SQLServer2016 ENU
   win_shell:
-    .\SETUP.EXE /CONFIGURATIONFILE=ConfigurationFile.ini
+    .\SQLServer2016.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=en-US /Q /IACCEPTSQLSERVERLICENSETERMS=True
   args:
-    chdir: C:\temp\SQLEXPRADV_x64_ENU
+    chdir: C:\temp
+  when: language == "ENU"
+
+- name: Install SQLServer2016 CHS
+  win_shell:
+    .\SQLServer2016.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=zh-CN /Q /IACCEPTSQLSERVERLICENSETERMS=True
+  args:
+    chdir: C:\temp
+  when: language == "CHS"
 
 ## 安装SSMS
 - name: Download SSMS
   win_get_url:
-    url: https://download.microsoft.com/download/2/9/C/29CC9731-CE3B-4EC8-89D8-E6B8EE88EAF5/SSMS-Setup-ENU.exe
+    url: https://download.microsoft.com/download/2/9/C/29CC9731-CE3B-4EC8-89D8-E6B8EE88EAF5/SSMS-Setup-"{{language}}".exe
     dest: C:\temp
 
 - name: Install SSMS

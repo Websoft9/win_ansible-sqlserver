@@ -9,24 +9,32 @@
   win_get_url:
     url: https://download.microsoft.com/download/3/9/F/39F968FA-DEBB-4960-8F9E-0E7BB3035959/SQLEXPRADV_x64_ENU.exe
     dest: C:\temp\
+  when: lanauge == "ENU"
+
+- name: Download SQLServer SQLServer2014SP3
+  win_get_url:
+    url: https://download.microsoft.com/download/8/8/1/8818970B-38B5-47C4-BEA5-916436B9C540/SQLEXPRADV_x64_CHS.exe
+    dest: C:\temp\
+  when: lanauage == "CHS"
 
 # 解压安装包
 - name: unzip package
   win_shell:
-    .\SQLEXPRADV_x64_ENU.exe /q
+    .\SQLEXPRADV_x64_{{language}}.exe /q
   args:
     chdir: C:\temp
 
+## 安装
 - name: Copy ConfigurationFile.ini
   win_template:
     src: ConfigurationFile_2014.ini.j2
-    dest: C:\temp\SQLEXPRADV_x64_ENU\ConfigurationFile.ini
+    dest: C:\temp\SQLEXPRADV_x64_{{lanauage}}\ConfigurationFile.ini
 
 - name: Install SQLServer2014SP3
   win_shell:
     .\SETUP.EXE /CONFIGURATIONFILE=ConfigurationFile.ini
   args:
-    chdir: C:\temp\SQLEXPRADV_x64_ENU
+    chdir: C:\temp\SQLEXPRADV_x64_{{language}}
 
 ## 快捷方式
 - name: Create SSMS lnk

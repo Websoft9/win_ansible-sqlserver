@@ -25,39 +25,39 @@
     url: https://download.microsoft.com/download/5/E/9/5E9B18CC-8FD5-467E-B5BF-BADE39C51F73/SQLServer2017-SSEI-Expr.exe
     dest: C:\temp\SQLServer2017.exe
 
-- name: Download SQLServer2017
-  win_shell:
-    .\SQLServer2017.exe /ACTION=Download /ENU /MEDIAPATH=C:\temp /MEDIATYPE=Advanced /Q
-  args:
-    chdir: C:\temp
-
-# 解压安装包
-- name: unzip package
-  win_shell:
-    .\SQLEXPRADV_x64_ENU.exe /q
-  args:
-    chdir: C:\temp
-
+## 安装 SQLServer
 - name: Copy ConfigurationFile.ini
   win_template:
     src: ConfigurationFile_2017.ini.j2
-    dest: C:\temp\SQLEXPRADV_x64_ENU\ConfigurationFile.ini
+    dest: C:\temp\ConfigurationFile.ini
 
-- name: Install SQLServer2017
+- name: Install SQLServer2017 ENU
   win_shell:
-    .\SETUP.EXE /CONFIGURATIONFILE=ConfigurationFile.ini
+    .\SQLServer2017.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=en-US /Q /IACCEPTSQLSERVERLICENSETERMS=True
   args:
-    chdir: C:\temp\SQLEXPRADV_x64_ENU
+    chdir: C:\temp\
+  when: language == "ENU"
+
+- name: Install SQLServer2017 CHS
+  win_shell:
+    .\SQLServer2017.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=zh-CN /Q /IACCEPTSQLSERVERLICENSETERMS=True
+  args:
+    chdir: C:\temp\
+  when: language == "CHS"
+
+- name: Reboot Machine
+  win_reboot:
+    reboot_timeout: 3600
 
 ## 安装SSMS
 - name: Download SSMS
   win_get_url:
-    url: https://download.microsoft.com/download/2/9/C/29CC9731-CE3B-4EC8-89D8-E6B8EE88EAF5/SSMS-Setup-ENU.exe
+    url: https://download.microsoft.com/download/2/9/C/29CC9731-CE3B-4EC8-89D8-E6B8EE88EAF5/SSMS-Setup-{{language}}.exe
     dest: C:\temp
 
 - name: Install SSMS
   win_shell:
-    .\SSMS-Setup-ENU.exe /install /quiet /norestart
+    .\SSMS-Setup-{{language}}.exe /install /quiet /norestart
   args:
     chdir: C:\temp
 
@@ -84,6 +84,7 @@
     src: C:\Credentials\password.txt
     dest: C:\Users\Public\Desktop\password.lnk
 
+## 删除临时目录
 - name: Delete temporary directory
   win_file:
     path: C:\temp

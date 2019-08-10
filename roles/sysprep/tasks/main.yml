@@ -8,15 +8,6 @@
     reboot: yes
     reboot_timeout: 3600
 
-# - name: Windows Update by powershell
-#   win_shell:
-#     Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-#     Install-Module PSWindowsUpdate -Force
-#     Get-WindowsUpdate
-#     Install-WindowsUpdate -AcceptAll -MicrosoftUpdate -AutoReboot
-#   become: yes
-#   become_user: websoft9
-
 - name: Reboot Machine
   win_reboot:
     reboot_timeout: 3600

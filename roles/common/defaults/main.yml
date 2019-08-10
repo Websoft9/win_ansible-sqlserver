@@ -1,7 +1,7 @@
 # url
 7zip: https://www.7-zip.org/a/7z1900-x64.msi
 notepad: https://notepad-plus-plus.org/repository/7.x/7.7.1/npp.7.7.1.Installer.x64.exe
-chrome: http://dl.google.com/chrome/install/375.126/chrome_installer.exe
+chrome: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/ChromeStandaloneSetup64.exe
 dbForge: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/dbforgemysql81exp.exe
 
 # # VC++

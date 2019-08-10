@@ -12,7 +12,12 @@ ROLE="AllFeatures_WithDefaults"
 
 ; Use the /ENU parameter to install the English version of SQL Server on your localized Windows operating system. 
 
+{% if language == ENU %}
 ENU="True"
+{% elif language == CHS %}
+ENU="False"
+{% endif %}
+
 
 ; Parameter that controls the user interface behavior. Valid values are Normal for the full UI,AutoAdvance for a simplied UI, and EnableUIOnServerCore for bypassing Server Core setup GUI block. 
 
@@ -124,7 +129,11 @@ ENABLERANU="True"
 
 ; Specifies a Windows collation or an SQL collation to use for the Database Engine. 
 
+{% if language == "ENU" %}
 SQLCOLLATION="SQL_Latin1_General_CP1_CI_AS"
+{% elif language == "CHS" %}
+SQLCOLLATION="Chinese_PRC_CI_AS"
+{% endif %}
 
 ; Account for SQL Server service: Domain\User or system account. 
 
