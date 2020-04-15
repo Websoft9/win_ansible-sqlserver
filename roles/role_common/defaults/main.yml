@@ -1,0 +1,37 @@
+common_7zip_download: "https://www.7-zip.org/a/7z1900-x64.msi"
+common_notepad_download: "https://notepad-plus-plus.org/repository/7.x/7.7.1/npp.7.7.1.Installer.x64.exe"
+common_dbforge_download: "http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/dbforgemysql81exp.exe"
+common_chrome_download: "http://libs.websoft9.com/apps/Windows/ChromeStandaloneSetup64.exe"
+
+# # VC++ origin address
+# vc2010: https://www.realvnc.com/download/file/viewer.files/VNC-Viewer-6.19.325-Windows.exe
+# vc2012: https://my.visualstudio.com/Downloads?pid=1452
+# vc2013: https://aka.ms/highdpimfc2013x64enu
+# vc2015: https://aka.ms/vs/16/release/vc_redist.x64.exe
+
+# vc++
+common_vc_meta:
+  vc2008:
+    id: vc++2008
+    url: http://libs.websoft9.com/apps/Windows/vcredist_2008_x64.exe
+    name: vc++2008.exe
+  vc2010:
+    id: vc++2010
+    url: http://libs.websoft9.com/apps/Windows/vcredist_2010_x64.exe
+    name: vc++2010.exe
+  vc2012:
+    id: vc++2012
+    url: http://libs.websoft9.com/apps/Windows/vcredist_2012_x64.exe
+    name: vc++2012.exe
+  vc2013:
+    id: vc++2013
+    url: http://libs.websoft9.com/apps/Windows/vcredist_2013_x64.exe
+    name: vc++2013.exe
+  vc++2015:
+    id: vc++2015
+    url: http://libs.websoft9.com/apps/Windows/vc_redist_2015_2019.x64.exe
+    name: vc++2015.exe
+
+# switch
+common_install_vc: True
+common_install_dbforge: True

@@ -1,8 +1,9 @@
 [windows-server]
-137.117.42.39
+119.8.103.233
+#119.8.45.158
 
 [windows-server:vars]
-ansible_ssh_user="websoft9"
+ansible_ssh_user="administrator"
 ansible_ssh_pass="Qwerty123456"
 ansible_ssh_port=5985
 ansible_connection="winrm"

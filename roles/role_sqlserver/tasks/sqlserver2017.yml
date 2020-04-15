@@ -1,0 +1,24 @@
+---
+## install SQLServer
+- name: Copy ConfigurationFile.ini
+  win_template:
+    src: ConfigurationFile_2017.ini.j2
+    dest: C:\temp\ConfigurationFile.ini
+
+- name: Install SQLServer2017 ENU
+  win_shell:
+    .\{{sqlserver_name}}.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=en-US /Q /IACCEPTSQLSERVERLICENSETERMS=True
+  args:
+    chdir: C:\temp\
+  when: language == "ENU"
+
+- name: Install SQLServer2017 CHS
+  win_shell:
+    .\{{sqlserver_name}}.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=zh-CN /Q /IACCEPTSQLSERVERLICENSETERMS=True
+  args:
+    chdir: C:\temp\
+  when: language == "CHS"
+
+- name: Reboot Machine
+  win_reboot:
+    reboot_timeout: 3600

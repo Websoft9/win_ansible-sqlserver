@@ -1,0 +1,49 @@
+# pre-installation
+- set_fact:
+    sqlserver_name: "{{sqlserver_meta[sqlserver_version].name}}"
+    sqlserver_download: "{{sqlserver_meta[sqlserver_version][sqlserver_language].download}}"
+    sqlserver_ssms_download: "{{sqlserver_meta[sqlserver_version][sqlserver_language].ssms_download}}"
+    sqlserver_install_jdk: "{{sqlserver_meta[sqlserver_version].jdk}}"
+
+# # pre-installation when need
+# - name: Pre-install JDK for SQLServer{{sqlserver_version}}
+#   include: jdk.yml
+#   when: sqlserver_install_jdk
+
+# # Download SQLServer
+# - block:
+#   - name: Create temporary directory
+#     win_file:
+#       path: C:\temp
+#       state: directory
+
+#   - name: Download SQLServer
+#     win_get_url:
+#       url: "{{sqlserver_download}}"
+#       dest: C:\temp\{{sqlserver_name}}.exe
+
+# Install SQLserver
+- name: Install SQLServer{{sqlserver_version}}
+  include: sqlserver{{sqlserver_version}}.yml
+
+# Install SQLServer management studio when need
+- name: Install sqlserver management studio for SQLServer{{sqlserver_version}}
+  include: ssms.yml
+  when: sqlserver_ssms_download != "" and sqlserver_ssms_download != False and sqlserver_ssms_download != none
+
+## Create password description
+- block:
+  - name: Create Credentials Directory
+    win_file:
+      path: C:\Credentials\
+      state: directory
+
+  - name: Copy password.txt to Credentials
+    win_template:
+      src: password.txt.j2
+      dest: C:\Credentials\password.txt
+
+  - name: Create password.lnk on desktop
+    win_shortcut:
+      src: C:\Credentials\password.txt
+      dest: C:\Users\Public\Desktop\password.lnk

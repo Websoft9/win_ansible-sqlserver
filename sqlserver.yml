@@ -1,15 +1,55 @@
 ---
-- name: wampserver
+- name: sqlserver
   hosts: all
-  become: yes
-  become_user: websoft9
-  become_method: runas
+
+  vars_files:
+    - vars/main.yml
+
+  vars_prompt:
+    - name: 'sqlserver_choose'
+      prompt: "\nChoose serial number to install SQLServer Express \n\n
+      1: SQLServer Express 2005\n
+      2: SQLServer Express 2008\n
+      3: SQLServer Express 2012\n
+      4: SQLServer Express 2014\n
+      5: SQLServer Express 2016\n
+      6: SQLServer Express 2017\n
+      7. SQLServer Express 2019\n"
+      private: no
+      default: 5
+
+    - name: 'language_choose'
+      prompt: "\nWhich language do you want to install?\n\n
+      1: Chinese\n
+      2: English\n"
+      private: no
+      default: 1
 
   vars:
-    ansible_become_password: Qwerty123456
+    select_language_ver:
+      '1': "CHS"
+      '2': "ENU"
+    select_sqlserver_ver:
+      '1': "2005"
+      '2': "2008"
+      '3': "2012"
+      '4': "2014"
+      '5': "2016"
+      '6': "2017"
+      '7': "2019"
+
+    sqlserver_language: "{{select_language_ver[language_choose]}}"
+    sqlserver_version: "{{select_sqlserver_ver[sqlserver_choose]}}"
+    
+  pre_tasks:
+    - debug:
+        msg: SQLServer Express will be installed, version is {{ sqlserver_version }}, language is {{sqlserver_language}}, OS is {{ansible_distribution}} }
+    
 
   roles:
-    - { role: common, tags: "common" }
-    - { role: IIS, tags: "IIS" }
-    - { role: sqlserver, tags: "sqlserver" }
-    - { role: sysprep, tags: "sysprep"}
+    - { role: role_common, tags: "role_common" }
+    - { role: role_cloud, tags: "role_cloud" }
+    - { role: role_iis, tags: "role_iis" }
+    - { role: role_sqlserver, tags: "role_sqlserver" }
+    # - { role: role_preend, tags: "role_preend" }
+    # - { role: role_end, tags: "role_end" }

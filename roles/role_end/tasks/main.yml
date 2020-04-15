@@ -1,0 +1,50 @@
+---
+- name: Windows update
+  win_updates:
+    category_names:
+      - SecurityUpdates
+      - CriticalUpdates
+      - UpdateRollups
+    reboot: yes
+    reboot_timeout: 3600
+    log_path: C:\Users\websoft9\Desktop\1.txt
+
+# - name: Windows Update by powershell
+#   win_shell:
+#     Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+#     Install-Module PSWindowsUpdate -Force
+#     Get-WindowsUpdate
+#     Install-WindowsUpdate -AcceptAll -MicrosoftUpdate -AutoReboot
+#   become: yes
+#   become_user: websoft9
+
+- name: Reboot Machine
+  win_reboot:
+    reboot_timeout: 3600
+    test_command: "whoami"
+
+- name: disable Winrm
+  win_shell: sc config winrm start= disabled
+  args:
+    executable: cmd
+
+- name: Settings ExecutionPolicy
+  win_shell: Set-ExecutionPolicy -ExecutionPolicy Restricted -Force
+  ignore_errors: yes
+
+## Sysprep
+- name: Sysprep for Azure
+  win_command:
+    .\Sysprep.exe /oobe /generalize /shutdown
+  args:
+    chdir: C:\Windows\System32\Sysprep
+  ignore_errors: yes
+  when: cloudplatform == "Azure"
+
+- name: Sysprep for AWS
+  win_command:
+    ec2config.exe -sysprep
+  args:
+    chdir: C:\Program Files\Amazon\ec2configservice\
+  ignore_errors: yes
+  when: cloudplatform == "AWS"

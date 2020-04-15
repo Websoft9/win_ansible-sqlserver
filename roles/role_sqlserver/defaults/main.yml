@@ -1,0 +1,82 @@
+# SQLServer Express Edition, 2005 | 2008 | 2012 |2014 | 2016 | 2017
+sqlserver_version: "2017"
+
+# SQLServer language
+sqlserver_language: "CHS"
+
+
+# 2008SP2 page: https://www.microsoft.com/en-US/download/details.aspx?id=44278
+# 2012SP4 page:: https://www.microsoft.com/en-us/download/details.aspx?id=56042
+# 2014SP3 page:: https://www.microsoft.com/en-us/download/details.aspx?id=57473
+# 2016SP2 page:: https://www.microsoft.com/en-us/download/details.aspx?id=56840
+# 2017 page:: https://www.microsoft.com/en-US/download/details.aspx?id=44278
+# ssms: sqlserver management studio
+
+sqlserver_meta:
+
+  "2005":
+    name: "SQLServer2005"
+    distribution: "SP4"
+    jdk: False
+    CHS:
+      download: ""
+      ssms_download: "https://download.microsoft.com/download/0/f/9/0f9d8ac6-d9a2-4233-ae78-4f957f0361e8/SQLServer2005_SSMSEE_x64.msi"
+    ENU:
+      download: ""
+      ssms_download: "https://download.microsoft.com/download/d/2/b/d2bc0e20-e5b4-47c5-bdcb-196a65229461/SQLServer2005_SSMSEE_x64.msi"
+  "2008":
+    name: "SQLServer2008"
+    distribution: "SP2"
+    jdk: False
+    CHS:
+      download: "https://download.microsoft.com/download/9/4/8/948966AB-52CA-40F1-8051-0216481065E6/SQLEXPRADV_x64_CHS.exe"
+      ssms_download: False
+    ENU:
+      download: "https://download.microsoft.com/download/0/4/B/04BE03CD-EAF3-4797-9D8D-2E08E316C998/SQLEXPRADV_x64_ENU.exe"
+      ssms_download: False
+  "2012":
+    name: "SQLServer2012"
+    distribution: "SP4"
+    jdk: False
+    CHS:
+      download: "https://download.microsoft.com/download/A/4/3/A43F9D8D-5346-441A-ABAE-86C3AFE17B4D/SQLEXPRADV_x64_CHS.exe"
+      ssms_download: False
+    ENU:
+      download: "https://download.microsoft.com/download/B/D/E/BDE8FAD6-33E5-44F6-B714-348F73E602B6/SQLEXPRADV_x64_ENU.exe"
+      ssms_download: False
+  "2014":
+    name: "SQLServer2014"
+    distribution: "SP3"
+    jdk: False
+    CHS:
+      download: "https://download.microsoft.com/download/8/8/1/8818970B-38B5-47C4-BEA5-916436B9C540/SQLEXPRADV_x64_CHS.exe"
+      ssms_download: False
+    ENU:
+      download: "https://download.microsoft.com/download/3/9/F/39F968FA-DEBB-4960-8F9E-0E7BB3035959/SQLEXPRADV_x64_ENU.exe"
+      ssms_download: False
+  "2016":
+    name: "SQLServer2016"
+    distribution: "SP2"
+    jdk: True
+    CHS:
+      download: "https://download.microsoft.com/download/3/7/6/3767D272-76A1-4F31-8849-260BD37924E4/SQLServer2016-SSEI-Expr.exe"
+      ssms_download: "https://download.microsoft.com/download/2/9/C/29CC9731-CE3B-4EC8-89D8-E6B8EE88EAF5/SSMS-Setup-CHS.exe"
+    ENU:
+      download: "https://download.microsoft.com/download/3/7/6/3767D272-76A1-4F31-8849-260BD37924E4/SQLServer2016-SSEI-Expr.exe"
+      ssms_download: "https://download.microsoft.com/download/2/9/C/29CC9731-CE3B-4EC8-89D8-E6B8EE88EAF5/SSMS-Setup-ENU.exe"
+  "2017":
+    name: "SQLServer2017"
+    distribution: "SP1"
+    jdk: True
+    CHS:
+      download: "https://download.microsoft.com/download/5/E/9/5E9B18CC-8FD5-467E-B5BF-BADE39C51F73/SQLServer2017-SSEI-Expr.exe"
+      ssms_download: "https://download.microsoft.com/download/2/9/C/29CC9731-CE3B-4EC8-89D8-E6B8EE88EAF5/SSMS-Setup-CHS.exe"
+    ENU:
+      download: "https://download.microsoft.com/download/5/E/9/5E9B18CC-8FD5-467E-B5BF-BADE39C51F73/SQLServer2017-SSEI-Expr.exe"
+      ssms_download: "https://download.microsoft.com/download/2/9/C/29CC9731-CE3B-4EC8-89D8-E6B8EE88EAF5/SSMS-Setup-ENU.exe"
+
+sqlserver_jdk_download: "http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/java-1.8.0-openjdk-1.8.0.222-1.b10.ojdkbuild.windows.x86_64.msi"
+
+# sqlserver automation backup tools
+sqlserver_install_sqlbackupmaster: False
+sqlserver_sqlbackupmaster_download: "https://f000.backblazeb2.com/file/KeyMetricSoft/SQLBackupMaster/sbm-setup.exe"

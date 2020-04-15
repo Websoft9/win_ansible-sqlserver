@@ -1,0 +1,15 @@
+---
+- name: wampserver
+  hosts: all
+  become: yes
+  become_user: websoft9
+  become_method: runas
+
+  vars:
+    ansible_become_password: Qwerty123456
+
+  roles:
+    - { role: common, tags: "common" }
+    - { role: IIS, tags: "IIS" }
+    - { role: sqlserver, tags: "sqlserver" }
+    - { role: sysprep, tags: "sysprep"}

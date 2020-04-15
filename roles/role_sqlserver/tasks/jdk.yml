@@ -1,0 +1,12 @@
+- name: Download OpenJDK1.8
+  win_get_url:
+    url: "{{sqlserver_jdk_download}}"
+    dest: C:\temp\openjdk-1.8.0.msi
+
+- name: Install OpenJDK1.8
+  win_package:
+    path: C:\temp\openjdk-1.8.0.msi
+    product_id: openjdk
+    arguments:
+        - /quiet
+        - /norestart

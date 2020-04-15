@@ -1,0 +1,16 @@
+# url
+7zip: https://www.7-zip.org/a/7z1900-x64.msi
+notepad: https://notepad-plus-plus.org/repository/7.x/7.7.1/npp.7.7.1.Installer.x64.exe
+chrome: http://libs.websoft9.com/apps/Windows/ChromeStandaloneSetup64.exe
+
+# dbForge
+dbForge: http://libs-websoft9-com.oss-cn-qingdao.aliyuncs.com/apps/Windows/dbforgemysql81exp.exe
+
+
+# VC++2010
+vc2010: https://www.realvnc.com/download/file/viewer.files/VNC-Viewer-6.19.325-Windows.exe
+vc2012: https://my.visualstudio.com/Downloads?pid=1452
+vc2013: https://aka.ms/highdpimfc2013x64enu
+vc2015: https://aka.ms/vs/16/release/vc_redist.x64.exe
+
+
