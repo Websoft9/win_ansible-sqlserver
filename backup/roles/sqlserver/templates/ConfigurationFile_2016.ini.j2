@@ -1,0 +1,186 @@
+;SQL Server 2016 Configuration File
+[OPTIONS]
+
+; 指定安装程序的工作流，如 INSTALL、UNINSTALL 或 UPGRADE。这是必需的参数。 
+
+ACTION="Install"
+
+; 尚未定义命令行参数 ROLE 的详细帮助。 
+
+ROLE="AllFeatures_WithDefaults"
+
+; 指定从命令行运行时，SQL Server 安装程序不应显示隐私声明。 
+
+SUPPRESSPRIVACYSTATEMENTNOTICE="False"
+
+; 指定此参数并接受 Microsoft R Open 和 Microsoft R Server 条款即表明你确认已阅读并了解使用条款。 
+
+IACCEPTROPENLICENSETERMS="False"
+
+; 使用 /ENU 参数可在本地化的 Windows 操作系统上安装英语版本的 SQL Server。 
+
+{% if language == ENU %}
+ENU="True"
+{% elif language == CHS %}
+ENU="False"
+{% endif %}
+
+; 安装程序将不会显示任何用户界面。 
+
+QUIET="True"
+
+; 安装程序将只显示进度，而不需要任何用户交互。 
+
+QUIETSIMPLE="False"
+
+; 用于控制用户界面行为的参数。有效值对于完整 UI 为 Normal，对于简化的 UI 为 AutoAdvance，为 EnableUIOnServerCore 则跳过 Server Core 安装程序 GUI 块。 
+
+UIMODE="AutoAdvance"
+
+; 指定 SQL Server 安装程序是否应发现和包括产品更新。有效值是 True 和 False 或者 1 和 0。默认情况下，SQL Server 安装程序将包括找到的更新。 
+
+UpdateEnabled="False"
+
+; 如果提供了此参数，则此计算机将使用 Microsoft 更新检查更新。 
+
+USEMICROSOFTUPDATE="False"
+
+; 指定要安装、卸载或升级的功能。顶级功能列表包括 SQL、AS、RS、IS、MDS 和工具。SQL 功能将安装数据库引擎、复制、全文和 Data Quality Services (DQS)服务器。工具功能将安装共享组件。 
+
+FEATURES=SQLENGINE
+
+; 指定 SQL Server 安装程序将获取产品更新的位置。有效值为 "MU" (以便搜索产品更新)、有效文件夹路径以及 .\MyUpdates 或 UNC 共享目录之类的相对路径。默认情况下，SQL Server 安装程序将通过 Window Server Update Services 搜索 Microsoft Update 或 Windows Update 服务。 
+
+UpdateSource="MU"
+
+; 显示命令行参数用法 
+
+HELP="False"
+
+; 指定应将详细的安装程序日志传送到控制台。 
+
+INDICATEPROGRESS="True"
+
+; 指定安装程序应该安装到 WOW64 中。IA64 或 32 位系统不支持此命令行参数。 
+
+X86="False"
+
+; 指定默认实例或命名实例。MSSQLSERVER 是非 Express 版本的默认实例，SQLExpress 则是 Express 版本的默认实例。在安装 SQL Server 数据库引擎(SQL)、Analysis Services (AS)或 Reporting Services (RS)时，此参数是必需的。 
+
+INSTANCENAME="SQLEXPRESS"
+
+; 指定共享组件的安装根目录。在已安装共享组件后，此目录保持不变。 
+
+INSTALLSHAREDDIR="C:\Program Files\Microsoft SQL Server"
+
+; 指定 WOW64 共享组件的安装根目录。在已安装 WOW64 共享组件后，此目录保持不变。 
+
+INSTALLSHAREDWOWDIR="C:\Program Files (x86)\Microsoft SQL Server"
+
+; 为您已指定的 SQL Server 功能指定实例 ID。SQL Server 目录结构、注册表结构和服务名称将包含 SQL Server 实例的实例 ID。 
+
+INSTANCEID="SQLEXPRESS"
+
+; TelemetryStartupConfigDescription 
+
+SQLTELSVCSTARTUPTYPE="Automatic"
+
+; TelemetryUserNameConfigDescription 
+
+SQLTELSVCACCT="NT Service\SQLTELEMETRY$SQLEXPRESS"
+
+; 指定安装目录。 
+
+INSTANCEDIR="C:\Program Files\Microsoft SQL Server"
+
+; 代理帐户名 
+
+AGTSVCACCOUNT="NT AUTHORITY\NETWORK SERVICE"
+
+; 安装后自动启动服务。  
+
+AGTSVCSTARTUPTYPE="Disabled"
+
+; CM 程序块 TCP 通信端口 
+
+COMMFABRICPORT="0"
+
+; 矩阵如何使用专用网络 
+
+COMMFABRICNETWORKLEVEL="0"
+
+; 如何保护程序块间的通信 
+
+COMMFABRICENCRYPTION="0"
+
+; CM 程序块使用的 TCP 端口 
+
+MATRIXCMBRICKCOMMPORT="0"
+
+; SQL Server 服务的启动类型。 
+
+SQLSVCSTARTUPTYPE="Automatic"
+
+; 启用 FILESTREAM 功能的级别(0、1、2 或 3)。 
+
+FILESTREAMLEVEL="0"
+
+; 设置为 "1" 可为 SQL Server Express 启用 RANU。 
+
+ENABLERANU="True"
+
+; 指定要用于数据库引擎的 Windows 排序规则或 SQL 排序规则。 
+
+{% if language == ENU %}
+SQLCOLLATION="SQL_Latin1_General_CP1_CI_AS"
+{% elif language == CHS %}
+SQLCOLLATION="Chinese_PRC_CI_AS"
+{% endif %}
+
+; SQL Server 服务的帐户: 域\用户或系统帐户。 
+
+SQLSVCACCOUNT="NT Service\MSSQL$SQLEXPRESS"
+
+; 设置为 "True" 以启用 SQL Server 服务的即时文件初始化。如果已启用，安装程序将授予数据库引擎服务 SID“执行卷维护任务”特权。这可能会导致信息泄漏，因为这会允许未经授权的主体访问已删除的内容。 
+
+SQLSVCINSTANTFILEINIT="True"
+
+; 要设置为 SQL Server 系统管理员的 Windows 帐户。 
+
+SQLSYSADMINACCOUNTS="IZO52M4EPWQ970Z\Administrator"
+
+; 数据库引擎 TempDB 文件数。 
+
+SQLTEMPDBFILECOUNT="1"
+
+; 指定数据库引擎 TempDB 数据文件的初始大小(MB)。 
+
+SQLTEMPDBFILESIZE="8"
+
+; 指定每个数据库引擎 TempDB 数据文件的自动增长增量(MB)。 
+
+SQLTEMPDBFILEGROWTH="64"
+
+; 指定数据库引擎 TempDB 日志文件的初始大小(MB)。 
+
+SQLTEMPDBLOGFILESIZE="8"
+
+; 指定数据库引擎 TempDB 日志文件的自动增长增量(MB)。 
+
+SQLTEMPDBLOGFILEGROWTH="64"
+
+; 将当前用户设置为 %SQL_PRODUCT_SHORT_NAME% Express 的数据库引擎系统管理员。 
+
+ADDCURRENTUSERASSQLADMIN="True"
+
+; 指定 0 禁用 TCP/IP 协议，指定 1 则启用该协议。 
+
+TCPENABLED="0"
+
+; 指定 0 禁用 Named Pipes 协议，指定 1 则启用该协议。 
+
+NPENABLED="0"
+
+; Browser 服务的启动类型。 
+
+BROWSERSVCSTARTUPTYPE="Disabled"
