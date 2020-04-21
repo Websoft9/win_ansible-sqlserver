@@ -1,0 +1,12 @@
+- name: Download OpenJDK1.8
+  win_get_url:
+    url: "{{tools_sqlbackupmaster_download}}"
+    dest: C:\temp\sqlbackupmaster.exe
+
+# to do
+- name: Install SQLBackupMaster
+  win_package:
+    path: C:\temp\sqlbackupmaster.exe
+    product_id: sqlbackupmaster
+    arguments:
+        - /q

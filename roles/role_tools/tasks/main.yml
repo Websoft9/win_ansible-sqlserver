@@ -1,0 +1,5 @@
+- include: dbforge.yml
+  when: tools_dbforge_install
+
+- include: sqlbackupmaster.yml
+  when: tools_sqlbackupmaster_install

@@ -1,7 +1,7 @@
-Ansible Role: IIS
+Ansible Role: 9Panel
 =========
 
-本 Role 是Ansible（Windows版）项目IIS模块，主要用于处理IIS安装以及特殊配置
+本 Role 是Ansible（Windows版）的9panel处理role，主要用于处理9panel的显示以及将9panel作为www.example.com程序。
 
 ## Requirements
 
@@ -13,16 +13,6 @@ Ansible Role: IIS
 | Python 版本 | Python2  |
 | Python 组件 |    |
 | Runtime |  |
-
-版本对应关系：
-
-| SQLServer版本            | Windows2008R2SP1 | Windows2012R2 | Windows2016 | Windows2019 | 测试平台    |
-| ------------------------ | :--------------: | :-----------: | :---------: | :---------: | ----------- |
-| SQLServer2012Express SP4 |        ✔         |       ✔       |      ✔      |      ✖      | windows2016 |
-| SQLServer2014Express SP3 |        ✔         |       ✔       |      ✖      |      ✖      | windows2012 |
-| SQLServer2016Express SP2 |        ✔         |       ✔       |      ✔      |      ✖      | windows2019 |
-| SQLServer2017Express     |        ✖         |       ✔       |      ✔      |      ✖      | windows2019 |
-
 
 
 ## Related roles
@@ -48,7 +38,6 @@ Ansible Role: IIS
 注意： 
 1. ×××××××
 2. ×××××××
-
 
 ## Example
 

@@ -1,0 +1,65 @@
+# 9panel
+- name: Create temporary directory
+  win_file:
+    path: C:\temp\
+    state: directory
+
+- name: delete default source code
+  win_file:
+    path: C:\websoft9\wampstack\apache2\htdocs
+    state: absent
+
+- name: create www folder
+  win_file:
+    path: "{{item}}"
+    state: directory
+  with_items:
+    - C:\websoft9\wampstack\apache2\htdocs
+    - C:\websoft9\wampstack\apps\9panel
+
+- name: Download 9panel
+  win_get_url:
+    url: https://github.com/Websoft9/9panel/archive/master.zip
+    dest: C:\temp\9panel.zip
+
+- name: unzip 9panel
+  win_unzip:
+    src: C:\temp\9panel.zip
+    dest: C:\temp\
+    delete_archive: yes
+
+- name: copy 9panel to \wampstack\apps\
+  win_copy:
+    src: C:\temp\9panel-master\
+    dest: C:\websoft9\wampstack\apps\9panel
+    remote_src: yes
+
+- name: modify 9panel
+  win_lineinfile:
+    path: C:\websoft9\wampstack\apps\9panel\js\websoft9.js
+    regexp: 'var set_infrastructure="LAMP";'
+    line: 'var set_infrastructure="WAMP";'
+
+- name: copy 9panel to c:\wwwroot\www.example.com
+  win_copy:
+    src: C:\websoft9\wampstack\apps\9panel\
+    dest: C:\wwwroot\www.example.com
+    remote_src: yes
+
+- name: delete extra file
+  win_file:
+    path: C:\websoft9\wampserver\www\{{item}}
+    state: absent
+  with_items:
+    - index.html
+    - db.html
+    - ftp.html
+    - tools.html
+
+- name: Rename example.html
+  win_shell: ren C:\wwwroot\www.example.com\example.html index.html
+
+- name: delete temporary directory
+  win_file:
+    path: C:\temp\
+    state: absent

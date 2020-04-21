@@ -12,9 +12,9 @@ ROLE="AllFeatures_WithDefaults"
 
 ; Use the /ENU parameter to install the English version of SQL Server on your localized Windows operating system. 
 
-{% if sqlserver_language == "ENU" %}
+{% if language == ENU %}
 ENU="True"
-{% elif sqlserver_language == "CHS" %}
+{% elif language == CHS %}
 ENU="False"
 {% endif %}
 
@@ -129,9 +129,9 @@ ENABLERANU="True"
 
 ; Specifies a Windows collation or an SQL collation to use for the Database Engine. 
 
-{% if sqlserver_language == "ENU" %}
+{% if language == "ENU" %}
 SQLCOLLATION="SQL_Latin1_General_CP1_CI_AS"
-{% elif sqlserver_language == "CHS" %}
+{% elif language == "CHS" %}
 SQLCOLLATION="Chinese_PRC_CI_AS"
 {% endif %}
 
@@ -141,13 +141,13 @@ SQLSVCACCOUNT="NT Service\MSSQLSERVER"
 
 ; Windows account(s) to provision as SQL Server system administrators. 
 
-; SQLSYSADMINACCOUNTS="{{ansible_hostname}}\websoft9"
+SQLSYSADMINACCOUNTS="{{ansible_hostname}}\websoft9"
 
-; SAPWD="websoft9!"
+SAPWD="websoft9!"
 
 ; The default is Windows Authentication. Use "SQL" for Mixed Mode Authentication. 
 
-; SECURITYMODE="SQL"
+SECURITYMODE="SQL"
 
 ; Provision current user as a Database Engine system administrator for %SQL_PRODUCT_SHORT_NAME% Express. 
 

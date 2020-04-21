@@ -1,30 +1,10 @@
 ---
 # 安装
-- name: Create {{sqlserver_name}} directory 
-  win_file:
-    path: C:\temp\{{sqlserver_name}}
-    state: directory
-
-- name: Extract {{sqlserver_name}}
-  win_shell: .\{{sqlserver_name}}.exe /u /x:C:\temp\{{sqlserver_name}}
-  args:
-    chdir: C:\temp\
-
-- name: Copy ConfigurationFile.ini
-  win_template:
-    src: ConfigurationFile_2012.ini.j2
-    dest: C:\temp\{{sqlserver_name}}\ConfigurationFile.ini
-
 - name: Install SQLServer2012SP4
   win_shell:
-    .\SETUP.EXE /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /CONFIGURATIONFILE=ConfigurationFile.ini
+    .\{{sqlserver_name}}.exe /q /IACCEPTSQLSERVERLICENSETERMS /ACTION=Install /FEATURES=SQL,AS,RS,IS,Tools /SECURITYMODE=SQL /SQLSYSADMINACCOUNTS="{{ansible_hostname}}\websoft9" /INSTANCENAME=MSSQLSERVER  /SAPWD="websoft9!" /ISSVCSTARTUPTYPE=Automatic /BROWSERSVCSTARTUPTYPE=Automatic /SQLSVCSTARTUPTYPE=Automatic /TCPENABLED=1 /SQLSVCACCOUNT="NT Service\MSSQLSERVER"
   args:
-    chdir: C:\temp\{{sqlserver_name}}
-
-- name: remove temp directory
-  win_file:
-    path: C:\temp\{{sqlserver_name}}
-    state: absent
+    chdir: C:\temp\
 
 ## 快捷方式
 - name: Create SSMS lnk
