@@ -52,5 +52,6 @@
     - { role: role_tools, tags: "role_tools", vars: {tools_sqlbackupmaster_install: True} }
     - { role: role_iis, tags: "role_iis" }
     - { role: role_sqlserver, tags: "role_sqlserver" }
+    - { role: mssql, tags: "mssql" }
     # - { role: role_preend, tags: "role_preend" }
     # - { role: role_end, tags: "role_end" }

@@ -5,22 +5,22 @@
     sqlserver_ssms_download: "{{sqlserver_meta[sqlserver_version][sqlserver_language].ssms_download}}"
     sqlserver_install_jdk: "{{sqlserver_meta[sqlserver_version].jdk}}"
 
-# pre-installation when need
-- name: Pre-install JDK for SQLServer{{sqlserver_version}}
-  include: jdk.yml
-  when: sqlserver_install_jdk
+# # pre-installation when need
+# - name: Pre-install JDK for SQLServer{{sqlserver_version}}
+#   include: jdk.yml
+#   when: sqlserver_install_jdk
 
-# Download SQLServer
-- block:
-  - name: Create temporary directory
-    win_file:
-      path: C:\temp
-      state: directory
+# # Download SQLServer
+# - block:
+#   - name: Create temporary directory
+#     win_file:
+#       path: C:\temp
+#       state: directory
 
-  - name: Download SQLServer
-    win_get_url:
-      url: "{{sqlserver_download}}"
-      dest: C:\temp\{{sqlserver_name}}.exe
+#   - name: Download SQLServer
+#     win_get_url:
+#       url: "{{sqlserver_download}}"
+#       dest: C:\temp\{{sqlserver_name}}.exe
 
 # Install SQLserver
 - name: Install SQLServer{{sqlserver_version}}
@@ -39,8 +39,8 @@
       state: directory
 
   - name: Copy password.txt to Credentials
-    win_template:
-      src: password.txt.j2
+    win_copy:
+      src: password.txt
       dest: C:\Credentials\password.txt
 
   - name: Create password.lnk on desktop
