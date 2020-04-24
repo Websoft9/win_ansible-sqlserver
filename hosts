@@ -1,9 +1,10 @@
 [windows-server]
-159.138.3.212
+47.56.89.163
+#47.56.83.40
 
 [windows-server:vars]
 ansible_ssh_user="administrator"
-ansible_ssh_pass="Xinshi1993."
+ansible_ssh_pass="Qwerty123456"
 ansible_ssh_port=5985
 ansible_connection="winrm"
 ansible_winrm_read_timeout_sec="120"
