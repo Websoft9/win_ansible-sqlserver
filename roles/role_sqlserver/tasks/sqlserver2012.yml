@@ -7,7 +7,7 @@
 # 解压
 - name: unzip {{sqlserver_name}}
   win_shell:
-    .\{{sqlserver_name}}.exe /u /x:c:\temp\
+    .\{{sqlserver_name}}.exe /u /x:c:\temp\{{sqlserver_name}}
   args:
     chdir: C:\temp\
 
