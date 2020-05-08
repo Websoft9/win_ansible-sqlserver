@@ -7,14 +7,14 @@
 # 解压
 - name: unzip {{sqlserver_name}}
   win_shell:
-    .\{{sqlserver_name}}.exe /u /x:c:\temp\
+    .\{{sqlserver_name}}.exe /u /x:c:\temp\{{sqlserver_name}}
   args:
     chdir: C:\temp\
 
 # 安装
 - name: Install {{sqlserver_name}}
   win_shell:
-    c:\temp\{{sqlserver_name}}\setup.exe /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=SQL,AS,RS,IS,Tools /INSTANCENAME=MSSQLSERVER
+    c:\temp\{{sqlserver_name}}\setup.exe /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=SQL,AS,RS,IS,Tools /INSTANCENAME=MSSQLSERVER /UpdateEnabled=False
 
 ## 快捷方式
 - name: Create SSMS lnk

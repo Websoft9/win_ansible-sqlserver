@@ -10,13 +10,13 @@
 - name: Copy ConfigurationFile.ini
   win_template:
     src: ConfigurationFile_2014.ini.j2
-    dest: C:\temp\SQLEXPRADV_x64_{{sqlserver_language}}\ConfigurationFile.ini
+    dest: C:\temp\{{sqlserver_name}}\ConfigurationFile.ini
 
 - name: Install SQLServer2014SP3
   win_shell:
     .\SETUP.EXE /CONFIGURATIONFILE=ConfigurationFile.ini
   args:
-    chdir: C:\temp\SQLEXPRADV_x64_{{sqlserver_language}}
+    chdir: C:\temp\{{sqlserver_name}}
 
 ## 快捷方式
 - name: Create SSMS lnk

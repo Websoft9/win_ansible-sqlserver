@@ -2,11 +2,11 @@
 - name: Download SSMS
   win_get_url:
     url: "{{sqlserver_ssms_download}}"
-    dest: C:\temp
+    dest: C:\temp\ssms_{{sqlserver_language}}.exe
 
 - name: Install SSMS
   win_shell:
-    .\SSMS-Setup-ENU.exe /install /quiet /norestart
+    .\ssms_{{sqlserver_language}}.exe /install /quiet /norestart
   args:
     chdir: C:\temp
 

@@ -13,9 +13,9 @@ SUPPRESSPRIVACYSTATEMENTNOTICE="False"
 
 IACCEPTROPENLICENSETERMS="True"
 
-{% if language == "ENU" %}
+{% if sqlserver_language == "ENU" %}
 ENU="True"
-{% elif language == "CHS" %}
+{% elif sqlserver_language == "CHS" %}
 ENU="False"
 {% endif %}
 
@@ -23,7 +23,7 @@ QUIET="True"
 
 QUIETSIMPLE="False"
 
-UpdateEnabled="True"
+UpdateEnabled="False"
 
 USEMICROSOFTUPDATE="True"
 
@@ -81,9 +81,9 @@ FILESTREAMLEVEL="0"
 
 ENABLERANU="True"
 
-{% if language == "ENU" %}
+{% if sqlserver_language == "ENU" %}
 SQLCOLLATION="SQL_Latin1_General_CP1_CI_AS"
-{% elif language == "CHS" %}
+{% elif sqlserver_language == "CHS" %}
 SQLCOLLATION="Chinese_PRC_CI_AS"
 {% endif %}
 
@@ -91,11 +91,11 @@ SQLSVCACCOUNT="NT Service\MSSQLSERVER"
 
 SQLSVCINSTANTFILEINIT="False"
 
-SQLSYSADMINACCOUNTS="{{ansible_hostname}}\websoft9"
+; SQLSYSADMINACCOUNTS="{{ansible_hostname}}\websoft9"
 
-SAPWD="websoft9!"
+; SAPWD="websoft9!"
 
-SECURITYMODE="SQL"
+;SECURITYMODE="SQL"
 
 SQLTEMPDBFILECOUNT="1"
 

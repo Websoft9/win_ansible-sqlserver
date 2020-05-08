@@ -7,8 +7,11 @@
 
 - name: delete default shortcut
   win_shortcut:
-    dest: C:\Users\hl\Desktop\dbForge Studio Express for MySQL.lnk
+    dest: "{{item}}"
     state: absent
+  with_items:
+    - C:\Users\Administrator\Desktop\dbForge Studio Express for MySQL.lnk
+    - C:\Users\websoft9\Desktop\dbForge Studio Express for MySQL.lnk
 
 - name: Create dbForge shortcut to public Desktop
   win_shortcut:

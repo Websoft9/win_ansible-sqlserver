@@ -2,19 +2,19 @@
 ## 安装
 - name: Copy ConfigurationFile.ini
   win_template:
-    src: ConfigurationFile_2016_ENU.ini.j2
+    src: ConfigurationFile_2016.ini.j2
     dest: C:\temp\ConfigurationFile.ini
 
 - name: Install SQLServer2016 ENU
   win_shell:
-    .\{{sqlserver_name}}.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=en-US /Q /IACCEPTSQLSERVERLICENSETERMS=True
+    .\{{sqlserver_name}}.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=en-US /Q /IACCEPTSQLSERVERLICENSETERMS
   args:
     chdir: C:\temp
   when: sqlserver_language == "ENU"
 
 - name: Install SQLServer2016 CHS
   win_shell:
-    .\{{sqlserver_name}}.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=zh-CN /Q /IACCEPTSQLSERVERLICENSETERMS=True
+    .\{{sqlserver_name}}.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=zh-CN /Q /IACCEPTSQLSERVERLICENSETERMS
   args:
     chdir: C:\temp
   when: sqlserver_language == "CHS"

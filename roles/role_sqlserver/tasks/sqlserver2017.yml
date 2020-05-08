@@ -7,18 +7,14 @@
 
 - name: Install SQLServer2017 ENU
   win_shell:
-    .\{{sqlserver_name}}.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=en-US /Q /IACCEPTSQLSERVERLICENSETERMS=True
+    .\{{sqlserver_name}}.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=en-US /Q /IACCEPTSQLSERVERLICENSETERMS
   args:
     chdir: C:\temp\
-  when: language == "ENU"
+  when: sqlserver_language == "ENU"
 
 - name: Install SQLServer2017 CHS
   win_shell:
-    .\{{sqlserver_name}}.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=zh-CN /Q /IACCEPTSQLSERVERLICENSETERMS=True
+    .\{{sqlserver_name}}.exe /ACTION=Install /CONFIGURATIONFILE=ConfigurationFile.ini /Lang=zh-CN /Q /IACCEPTSQLSERVERLICENSETERMS
   args:
     chdir: C:\temp\
-  when: language == "CHS"
-
-- name: Reboot Machine
-  win_reboot:
-    reboot_timeout: 3600
+  when: sqlserver_language == "CHS"

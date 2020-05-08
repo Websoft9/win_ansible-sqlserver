@@ -17,19 +17,28 @@
       path: C:\temp
       state: directory
 
-  - name: Download SQLServer
-    win_get_url:
-      url: "{{sqlserver_download}}"
-      dest: C:\temp\{{sqlserver_name}}.exe
-
-# Install SQLserver
-- name: Install SQLServer{{sqlserver_version}}
-  include: sqlserver{{sqlserver_version}}.yml
-
 # Install SQLServer management studio when need
 - name: Install sqlserver management studio for SQLServer{{sqlserver_version}}
   include: ssms.yml
   when: sqlserver_ssms_download != "" and sqlserver_ssms_download != False and sqlserver_ssms_download != none
+
+# Install SQLserver
+- name: Download SQLServer
+  win_get_url:
+    url: "{{sqlserver_download}}"
+    dest: C:\temp\{{sqlserver_name}}.exe
+
+- name: Set the region format to English United States
+  win_region:
+    unicode_language: en-US
+  register: result
+  when: sqlserver_language == "CHS"
+
+- win_reboot:
+  when: result.restart_required
+
+- name: Install SQLServer{{sqlserver_version}}
+  include: sqlserver{{sqlserver_version}}.yml
 
 ## Create password description
 - block:
@@ -47,3 +56,13 @@
     win_shortcut:
       src: C:\Credentials\password.txt
       dest: C:\Users\Public\Desktop\password.lnk
+
+- name: Set the unicode language to Chinese, reboot if required
+  win_region:
+    unicode_language: zh-CN
+  register: result
+  when: sqlserver_language == "CHS"
+
+- win_reboot:
+  when: result.restart_required
+
