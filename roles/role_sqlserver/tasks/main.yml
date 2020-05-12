@@ -17,11 +17,6 @@
       path: C:\temp
       state: directory
 
-# Install SQLServer management studio when need
-- name: Install sqlserver management studio for SQLServer{{sqlserver_version}}
-  include: ssms.yml
-  when: sqlserver_ssms_download != "" and sqlserver_ssms_download != False and sqlserver_ssms_download != none
-
 # Install SQLserver
 - name: Download SQLServer
   win_get_url:
@@ -37,8 +32,32 @@
 - win_reboot:
   when: result.restart_required
 
+- name: Enable CredSSP
+  win_copy:
+    src: CredSSP.PS1
+    dest: c:\temp
+
+- name: Enable CredSSP -2
+  script: c:\temp\CredSSP.PS1
+  args:
+    executable: powershell
+
 - name: Install SQLServer{{sqlserver_version}}
   include: sqlserver{{sqlserver_version}}.yml
+
+- name: Set the unicode language to Chinese, reboot if required
+  win_region:
+    unicode_language: zh-CN
+  register: result
+  when: sqlserver_language == "CHS"
+
+- win_reboot:
+  when: result.restart_required
+
+# Install SQLServer management studio when need
+- name: Install sqlserver management studio for SQLServer{{sqlserver_version}}
+  include: ssms.yml
+  when: sqlserver_ssms_download != "" and sqlserver_ssms_download != False and sqlserver_ssms_download != none
 
 ## Create password description
 - block:
@@ -56,13 +75,3 @@
     win_shortcut:
       src: C:\Credentials\password.txt
       dest: C:\Users\Public\Desktop\password.lnk
-
-- name: Set the unicode language to Chinese, reboot if required
-  win_region:
-    unicode_language: zh-CN
-  register: result
-  when: sqlserver_language == "CHS"
-
-- win_reboot:
-  when: result.restart_required
-

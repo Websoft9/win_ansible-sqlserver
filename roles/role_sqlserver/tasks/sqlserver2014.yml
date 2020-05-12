@@ -14,7 +14,7 @@
 
 - name: Install SQLServer2014SP3
   win_shell:
-    .\SETUP.EXE /CONFIGURATIONFILE=ConfigurationFile.ini
+    .\SETUP.EXE /Q /IACCEPTSQLSERVERLICENSETERMS /ACTION=install /FEATURES=SQL,AS,RS,IS,Tools /INSTANCENAME=MSSQLSERVER /UpdateEnabled=False
   args:
     chdir: C:\temp\{{sqlserver_name}}
 
