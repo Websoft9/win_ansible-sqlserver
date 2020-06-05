@@ -4,6 +4,11 @@
 
 不包含，但本部署包提供了一个免费的自动备份软件，参考本文档的 [SQLServer自动备份](/zh/solution-backup.md#sqlserver-express-自动备份)相关章节
 
+#### SQL Server Management Studio 是否支持浏览器访问？
+
+SQL Server Management Studio hosts a version of Microsoft Internet Explorer. This Web browser allows you to browse URLs, and view MSDN Library help topics without leaving SQL Server Management Studio. You can access the Web browser by pointing to Web Browser on the View menu, and then clicking Show Browser. 参考：https://docs.microsoft.com/en-us/sql/ssms/sql-server-management-studio-web-browser?view=sql-server-ver15
+
+
 #### SQLServer各个发行版有什么功能区别？
 
 以SQLServer2016为例，介绍 SQL Server的各个版本的差异
